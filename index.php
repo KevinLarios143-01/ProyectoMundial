@@ -306,9 +306,6 @@
               </div>
             </form>
           </div>
-          <audio controls>
-            <source src="./media/base.mp3" type="audio/mpeg">
-          </audio>
         </div>
       </section>
       <!--Section: Content-->
