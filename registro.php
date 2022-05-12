@@ -170,18 +170,18 @@
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
-                        <form name="ingresar">
+                        <form action="registro.php" method="POST" name="ingresar">
                             <!-- 2 column grid layout with text inputs for the first and last names -->
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="form3Example1" class="form-control" />
+                                        <input type="text" id="nombre" class="form-control" />
                                         <label class="form-label" for="form3Example1">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="form3Example2" class="form-control" />
+                                        <input type="text" id="apellido" class="form-control" />
                                         <label class="form-label" for="form3Example2">Apellido</label>
                                     </div>
                                 </div>
@@ -189,31 +189,31 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="email" id="form3Example3" class="form-control" />
+                                <input type="text" id="usuario" class="form-control" />
                                 <label class="form-label" for="form3Example3">Usuario</label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" id="form3Example4" class="form-control" />
+                                <input type="password" id="password" class="form-control" />
                                 <label class="form-label" for="form3Example4">Contrase&ntilde;a</label>
                             </div>
 
                             <!-- Checkbox -->
                             <div class="form-check d-flex justify-content-center mb-4">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" checked />
+                                <input class="form-check-input me-2" type="checkbox" value="A" id="isadmin"/>
                                 <label class="form-check-label" for="form2Example3">
                                     Administrador
                                 </label>
                             </div>
                             <!-- Password administrador -->
                             <div class="form-outline mb-4">
-                                <input type="codadmin" id="form3Example4" class="form-control" />
+                                <input type="text" id="codadmin" class="form-control" />
                                 <label class="form-label" for="form3Example4">C&otilde;digo Administrador</label>
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4">
+                            <button type="submit" name="register" class="btn btn-primary btn-block mb-4">
                                 Sign up
                             </button>
 
@@ -283,6 +283,40 @@
     </footer>
 
     <!--Footer-->
+    <?php
+        if (isset($_POST['register'])) {
+            
+            $nombre=$_POST['nombre'];
+            $apellido=$_POST['apellido'];
+            $username = $_POST['usuario'];
+            $passwords = $_POST['password'];
+            $rol=$_POST['isadmin'];
+            $acum=0;
+            $link = mysqli_connect('localhost', 'root', '','Mundial') or die('Could not connect: '. mysqli_connect_error());
+            $query = "SELECT * FROM usuarios WHERE usuario='$username'";
+
+            $result = mysqli_query($link,$query) or die('Query failed: ' . mysqli_error($link));
+        
+            while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                $userr = $_POST['username'];
+                $passr = $_POST['password'];
+                $nomr=$_POST['nombre'];
+                $rolr=$_POST['isadmin'];
+                $acumr=$_POST['acumulado'];
+                //$apellido=$_POST['apellido'];
+                if($username==$userr){
+                    echo '<p class="error">The email address is already registered!</p>';
+                }     
+            }
+            $query2 = "INSERT INTO Usuarios VALUES ($username,$paswords,'$nombre','$rol','$acum')";
+            $result2 = mysqli_query($link,$query2) or die('Query failed: ' . mysqli_error($link));
+            echo   '<div class="alert alert-success" role="alert">
+                    Your registration was successful!
+                    </div>';
+            
+        }
+    ?>
 </body>
 
 </html>
+
