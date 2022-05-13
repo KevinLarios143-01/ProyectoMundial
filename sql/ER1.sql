@@ -53,9 +53,11 @@ CREATE TABLE Usuarios(
 	usuario varchar(25),
 	contra varchar(30),
 	nombre varchar(30),
+	apellido varchar(30),
 	rol char(1),
 	acumulado int,
-	PRIMARY KEY (usuario)
+	PRIMARY KEY (usuario),
+	CHECK (rol in ('A','U'))
 );
 
 CREATE TABLE Quinielas(
