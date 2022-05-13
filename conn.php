@@ -6,7 +6,7 @@ You can use PDO (object oriented):
 Or the pg_connect() functions (procedural):
 
 <?php
-    $conn = pg_connect("host=localhost, port=5432 dbname='Mundial' ");
+    $conn = pg_connect("host=localhost, port=5432,dbname='Mundial' ");
     $result = pg_query($conn, "SELECT * FROM ");
     while ($row = pg_fetch_row($result)) {
         echo "<p>" . htmlspecialchars($row[0]) . "</p>\n";
