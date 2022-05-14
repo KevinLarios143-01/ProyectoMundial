@@ -1,3 +1,10 @@
+<?php
+    $host = "host=localhost";
+    $port = "port=5432";
+    $dbname = "dbname=Mundial";
+    $user = "user=postgres";
+    $password = "password=1234";
+?>
 <!doctype html>
 <html lang="en">
 
@@ -175,13 +182,13 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="nombre" class="form-control" />
+                                        <input type="text" id="nombre" name="nombre" class="form-control" />
                                         <label class="form-label" for="form3Example1">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="apellido" class="form-control" />
+                                        <input type="text" id="apellido" name="apellido" class="form-control" />
                                         <label class="form-label" for="form3Example2">Apellido</label>
                                     </div>
                                 </div>
@@ -189,26 +196,26 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="usuario" class="form-control" />
+                                <input type="text" id="usuario" name="usuario" class="form-control" />
                                 <label class="form-label" for="form3Example3">Usuario</label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" id="password" class="form-control" />
+                                <input type="password" id="password" name="password" class="form-control" />
                                 <label class="form-label" for="form3Example4">Contrase&ntilde;a</label>
                             </div>
 
                             <!-- Checkbox -->
                             <div class="form-check d-flex justify-content-center mb-4">
-                                <input class="form-check-input me-2" type="checkbox" value="A" id="isadmin"/>
+                                <input class="form-check-input me-2" type="checkbox" value="A" id="isadmin" name="isadmin"/>
                                 <label class="form-check-label" for="form2Example3">
                                     Administrador
                                 </label>
                             </div>
                             <!-- Password administrador -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="codadmin" class="form-control" />
+                                <input type="text" id="codadmin" name="codadmin" class="form-control" />
                                 <label class="form-label" for="form3Example4">C&otilde;digo Administrador</label>
                             </div>
 
@@ -292,27 +299,37 @@
             $passwords = $_POST['password'];
             $rol=$_POST['isadmin'];
             $acum=0;
-            $link = mysqli_connect('localhost', 'root', '','Mundial') or die('Could not connect: '. mysqli_connect_error());
-            $query = "SELECT * FROM usuarios WHERE usuario='$username'";
 
-            $result = mysqli_query($link,$query) or die('Query failed: ' . mysqli_error($link));
-        
-            while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                $userr = $_POST['username'];
-                $passr = $_POST['password'];
-                $nomr=$_POST['nombre'];
-                $rolr=$_POST['isadmin'];
-                $acumr=$_POST['acumulado'];
-                //$apellido=$_POST['apellido'];
+            $link = pg_connect("$host $port $dbname $user $password")or die('Could not connect: '. " error de conexion");
+            $query = "SELECT * FROM usuarios WHERE usuario='$username'";
+            $result = pg_query($link,$query) or die('Query failed: ' . pg_last_error($link));
+            $makeorno=true;
+            while ($line = pg_fetch_array($result)) {
+                $userr = $line['usuario'];
+                $passr = $line['contra'];
+                $nomr=$line['nombre'];
+                $apr=$line['apellido'];
+                $rolr=$line['rol'];
+                $acumr=$line['acumulado'];
                 if($username==$userr){
+                    $makeorno=false;
                     echo '<p class="error">The email address is already registered!</p>';
                 }     
             }
-            $query2 = "INSERT INTO Usuarios VALUES ($username,$paswords,'$nombre','$rol','$acum')";
-            $result2 = mysqli_query($link,$query2) or die('Query failed: ' . mysqli_error($link));
-            echo   '<div class="alert alert-success" role="alert">
-                    Your registration was successful!
-                    </div>';
+            if($makeorno){
+                
+                $query2 = "INSERT INTO usuarios VALUES ('$username','$passwords','$nombre','$apellido','$rol',$acum)";
+
+                $result2 = pg_query($link, $query2);
+                if(!$result2){
+                echo pg_last_error($dbconn);
+                } else {
+                echo "Inserted successfully";
+                }
+            }
+            
+
+
             
         }
     ?>
