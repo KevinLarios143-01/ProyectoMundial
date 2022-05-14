@@ -1,3 +1,10 @@
+<?php
+    $host = "host=localhost";
+    $port = "port=5432";
+    $dbname = "dbname=Mundial";
+    $user = "user=postgres";
+    $password = "password=1234";
+?>
 <!doctype html>
 <html lang="en">
 
@@ -98,8 +105,8 @@
                 <h5 class="mb-4">
                   21 de noviembre - 17 de diciembre
                 </h5>
-                <a class="btn btn-outline-light btn-lg m-2" href="#ingresar" role="button" rel="nofollow">Quinielas</a>
-                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" target="_blank" role="button">Registrarse</a>
+                <a class="btn btn-outline-light btn-lg m-2" href="index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
+                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis"  role="button">Registrarse</a>
               </div>
             </div>
           </div>
@@ -256,32 +263,33 @@
         </div>
       </section>
       <!--Section: Content-->
-
-      <hr class="my-5" />
+      <a name="ingresar"></a>
+      <hr class="my-5" />      
       <section class="mb-5">
+        
         <h4 class="mb-5 text-center">
           <strong>Ingresar a Quinielas</strong>
         </h4>
 
         <div class="row d-flex justify-content-center">
           <div class="col-md-6">
-            <a name="ingresar"></a>
-            <form name="ingresar">
+            
+            <form action="index.php" method="POST">
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
+                <input type="text" id="user" name="user" class="form-control" />
                 <label class="form-label" for="form3Example3">Usuario</label>
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
+                <input type="password" id="pass" name="pass" class="form-control" />
                 <label class="form-label" for="form3Example4">Contrase&ntilde;a</label>
               </div>
 
 
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button type="submit" name="ingresar" class="btn btn-primary btn-block mb-4">
                 Sign in
               </button>
 
@@ -309,6 +317,36 @@
         </div>
       </section>
       <!--Section: Content-->
+      <?php
+        if (isset($_POST['ingresar'])) {
+
+          $username = $_POST['user'];
+          $passwords = $_POST['pass'];
+          $trabajoono=true;
+          if($username!="" || $passwords!=""){
+            $$trabajoono=false;
+            echo '<div class="alert alert-warning" role="alert">Debe llenar ambos campos</div>';
+          }
+          
+          if($trabajoono){
+              $link = pg_connect("$host $port $dbname $user $password")or die('Could not connect: '. " error de conexion");
+              $query = "SELECT usuario, contra FROM usuarios WHERE usuario='$username' AND contra='$passwords'";
+              $result = pg_query($link,$query) or die('Query failed: ' . pg_last_error($link));
+              $login_check = pg_num_rows($result);
+              $makeorno=true;
+              if($login_check > 0){ 
+                $makeorno=true;
+                echo '<div class="alert alert-success" role="alert">
+                      Logueo correcto!
+                       </div>';   
+              }else{
+                  
+                  echo "Invalid Details";
+              }
+                
+          }  
+        }
+      ?>
     </div>
   </main>
   <!--Main layout-->
@@ -316,10 +354,10 @@
   <!--Footer-->
   <footer class="bg-light text-lg-start">
     <div class="py-4 text-center">
-      <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.youtube.com/fifa" rel="nofollow" target="_blank">
+      <a role="button" class="btn btn-primary btn-lg m-2" href="#" rel="nofollow" >
         Calendario de Partidos
       </a>
-      <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.facebook.com/fifaworldcup/" target="_blank">
+      <a role="button" class="btn btn-primary btn-lg m-2" href="#">
         Grupos
       </a>
     </div>

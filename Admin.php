@@ -1,3 +1,10 @@
+<?php
+    $host = "host=localhost";
+    $port = "port=5432";
+    $dbname = "dbname=Mundial";
+    $user = "user=postgres";
+    $password = "password=1234";
+?>
 <!doctype html>
 <html lang="en">
 

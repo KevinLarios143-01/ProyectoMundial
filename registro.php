@@ -105,8 +105,8 @@
                                 <h5 class="mb-4">
                                     21 de noviembre - 17 de diciembre
                                 </h5>
-                                <a class="btn btn-outline-light btn-lg m-2" href="#ingresar" role="button" rel="nofollow">Quinielas</a>
-                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" target="_blank" role="button">Registrarse</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" role="button">Registrarse</a>
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
-                        <form action="registro.php" method="POST" name="ingresar">
+                        <form action="registro.php#regis" method="POST" name="ingresar">
                             <!-- 2 column grid layout with text inputs for the first and last names -->
                             <div class="row mb-4">
                                 <div class="col">
@@ -247,16 +247,71 @@
                     </div>
                 </div>
             </section>
+            <?php
+                if (isset($_POST['register'])) {
+                    
+                    $nombre=$_POST['nombre'];
+                    $apellido=$_POST['apellido'];
+                    $username = $_POST['usuario'];
+                    $passwords = $_POST['password'];
+                    $rol="U";
+                    $trabajoono=true;
+                    if (isset($_POST["isadmin"])) {
+                        $rol=$_POST["isadmin"];
+                      
+                        $codadmin=$_POST['codadmin']; 
+                        if($codadmin=="adminmero"){
+                            $trabajoono=true;
+                        }else{
+                            echo '<div class="alert alert-warning" role="alert">Solo el administrador puede otorgar este rol</div>';
+                            $trabajoono=false;
+                        }
+                        
+                    }
+                    
+                    $acum=0;
+                    if($trabajoono){
+                        $link = pg_connect("$host $port $dbname $user $password")or die('Could not connect: '. " error de conexion");
+                        $query = "SELECT * FROM usuarios WHERE usuario='$username'";
+                        $result = pg_query($link,$query) or die('Query failed: ' . pg_last_error($link));
+                        $makeorno=true;
+                        while ($line = pg_fetch_array($result)) {
+                            $userr = $line['usuario'];
+                            $passr = $line['contra'];
+                            $nomr=$line['nombre'];
+                            $apr=$line['apellido'];
+                            $rolr=$line['rol'];
+                            $acumr=$line['acumulado'];
+                            if($username==$userr){
+                                $makeorno=false;
+                                echo '<div class="alert alert-warning" role="alert">The email address is already registered!</div>';
+                            }     
+                        }
+                        if($makeorno){
+                            $query2 = "INSERT INTO usuarios VALUES ('$username','$passwords','$nombre','$apellido','$rol',$acum)";
+                            $result2 = pg_query($link, $query2);
+                            if(!$result2){
+                                echo pg_last_error($dbconn);
+                            } else {
+                                echo '<div class="alert alert-success" role="alert">
+                                    Dato Insertado Correctamente!
+                                    </div>';
+                            }
+                        }     
+                    }
+                    
+                }
+            ?>
         </div>
     </main>
 
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.youtube.com/fifa" rel="nofollow" target="_blank">
-                Calendario de Partidos
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./index.php#ingresar" rel="nofollow">
+                Ir a Quinielas
             </a>
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.facebook.com/fifaworldcup/" target="_blank">
+            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.facebook.com/fifaworldcup/" >
                 Grupos
             </a>
         </div>
@@ -290,49 +345,7 @@
     </footer>
 
     <!--Footer-->
-    <?php
-        if (isset($_POST['register'])) {
-            
-            $nombre=$_POST['nombre'];
-            $apellido=$_POST['apellido'];
-            $username = $_POST['usuario'];
-            $passwords = $_POST['password'];
-            $rol=$_POST['isadmin'];
-            $acum=0;
 
-            $link = pg_connect("$host $port $dbname $user $password")or die('Could not connect: '. " error de conexion");
-            $query = "SELECT * FROM usuarios WHERE usuario='$username'";
-            $result = pg_query($link,$query) or die('Query failed: ' . pg_last_error($link));
-            $makeorno=true;
-            while ($line = pg_fetch_array($result)) {
-                $userr = $line['usuario'];
-                $passr = $line['contra'];
-                $nomr=$line['nombre'];
-                $apr=$line['apellido'];
-                $rolr=$line['rol'];
-                $acumr=$line['acumulado'];
-                if($username==$userr){
-                    $makeorno=false;
-                    echo '<p class="error">The email address is already registered!</p>';
-                }     
-            }
-            if($makeorno){
-                
-                $query2 = "INSERT INTO usuarios VALUES ('$username','$passwords','$nombre','$apellido','$rol',$acum)";
-
-                $result2 = pg_query($link, $query2);
-                if(!$result2){
-                echo pg_last_error($dbconn);
-                } else {
-                echo "Inserted successfully";
-                }
-            }
-            
-
-
-            
-        }
-    ?>
 </body>
 
 </html>
