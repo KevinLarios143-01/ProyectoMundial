@@ -1,5 +1,8 @@
 <?php
-    include('conn.php');
+//include('conn.php');
+session_start();
+$nombresa = $_SESSION['nombre_usuario'];
+echo "$nombresa";
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+    
     <title>FIFA</title>
 </head>
 
@@ -24,7 +28,7 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
-
+   
     <!--Main Navigation-->
     <header>
         <!-- Navbar -->
@@ -43,10 +47,10 @@
                             <a class="nav-link" aria-current="page" href="Grupos.php">Grupos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Partidos.php" rel="nofollow" >Partidos</a>
+                            <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Resultados.php" >Resultados</a>
+                            <a class="nav-link" href="Resultados.php">Resultados</a>
                         </li>
                     </ul>
 
@@ -168,25 +172,19 @@
         <div class="container">
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>Ingresar a Sistema</strong>
+                    <strong>Crear Grupos</strong>
                 </h4>
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
-                        <form method="POST" action="SessionAdmin.php">
-                            <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                <input type="text" name="user" id="user" class="form-control" />
-                                <label class="form-label" for="form3Example3">Usuario</label>
-                            </div>
-
-                            <!-- Password input -->
-                            <div class="form-outline mb-4">
-                                <input type="password" name="pass" id="pass" class="form-control" />
-                                <label class="form-label" for="form3Example4">Contrase&ntilde;a</label>
-                            </div>
-
+                        <form method="POST">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
 
                             <!-- Submit button -->
                             <button type="submit" name="login" class="btn btn-primary btn-block mb-4">
@@ -218,7 +216,7 @@
                 </div>
             </section>
             <!--Section: Content-->
-            
+
         </div>
     </main>
     <!--Main layout-->
@@ -266,4 +264,3 @@
 </body>
 
 </html>
-

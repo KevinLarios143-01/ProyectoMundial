@@ -1,5 +1,6 @@
 <?php
-    include('conn.php');
+    //include('conn.php');
+    session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -174,7 +175,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
-                        <form method="POST" action="SessionAdmin.php">
+                        <form method="POST">
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                                 <input type="text" name="user" id="user" class="form-control" />
@@ -218,7 +219,6 @@
                 </div>
             </section>
             <!--Section: Content-->
-            
         </div>
     </main>
     <!--Main layout-->
@@ -266,4 +266,3 @@
 </body>
 
 </html>
-

@@ -1,9 +1,5 @@
 <?php
-    $host = "host=localhost";
-    $port = "port=5432";
-    $dbname = "dbname=Mundial";
-    $user = "user=postgres";
-    $password = "password=1234";
+  require('conn.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -274,7 +270,7 @@
         <div class="row d-flex justify-content-center">
           <div class="col-md-6">
             
-            <form action="index.php" method="POST">
+            <form action="SessionQuiniela.php" method="POST">
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <input type="text" id="user" name="user" class="form-control" />
@@ -317,36 +313,7 @@
         </div>
       </section>
       <!--Section: Content-->
-      <?php
-        if (isset($_POST['ingresar'])) {
-
-          $username = $_POST['user'];
-          $passwords = $_POST['pass'];
-          $trabajoono=true;
-          if($username!="" || $passwords!=""){
-            $$trabajoono=false;
-            echo '<div class="alert alert-warning" role="alert">Debe llenar ambos campos</div>';
-          }
-          
-          if($trabajoono){
-              $link = pg_connect("$host $port $dbname $user $password")or die('Could not connect: '. " error de conexion");
-              $query = "SELECT usuario, contra FROM usuarios WHERE usuario='$username' AND contra='$passwords'";
-              $result = pg_query($link,$query) or die('Query failed: ' . pg_last_error($link));
-              $login_check = pg_num_rows($result);
-              $makeorno=true;
-              if($login_check > 0){ 
-                $makeorno=true;
-                echo '<div class="alert alert-success" role="alert">
-                      Logueo correcto!
-                       </div>';   
-              }else{
-                  
-                  echo "Invalid Details";
-              }
-                
-          }  
-        }
-      ?>
+     
     </div>
   </main>
   <!--Main layout-->
