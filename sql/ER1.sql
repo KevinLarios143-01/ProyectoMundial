@@ -17,14 +17,29 @@ CREATE TABLE Federacion(
 	PRIMARY KEY (cod_federacion)
 );
 
+INSERT INTO Federacion VALUES (1,'UEFA');
+INSERT INTO Federacion VALUES (2,'CONMEBOL');
+INSERT INTO Federacion VALUES (3,'CONCACAF');
+INSERT INTO Federacion VALUES (4,'AFC');
+INSERT INTO Federacion VALUES (5,'OFC');
+
 CREATE TABLE Grupo(
 	cod_grupo int,
 	nombre_grupo char(1),
 	PRIMARY KEY (cod_grupo)
 );
 
+INSERT INTO Grupo VALUES (1,'A');
+INSERT INTO Grupo VALUES (2,'B');
+INSERT INTO Grupo VALUES (3,'C');
+INSERT INTO Grupo VALUES (4,'D');
+INSERT INTO Grupo VALUES (5,'E');
+INSERT INTO Grupo VALUES (6,'F');
+INSERT INTO Grupo VALUES (7,'G');
+INSERT INTO Grupo VALUES (8,'H');
+
 CREATE TABLE Participantes(
-	cod_participante int,
+	cod_participante SERIAL,
 	nombre_participante varchar(30),
 	Bombo int,
 	skin bytea,

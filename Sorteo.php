@@ -1,8 +1,8 @@
 <?php
-//include('conn.php');
-session_start();
-$nombresa = $_SESSION['nombre_usuario'];
-echo "$nombresa";
+    //include('conn.php');
+    session_start();
+    $nombresa = $_SESSION['nombre_usuario'];
+    echo "$nombresa";
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,7 +19,7 @@ echo "$nombresa";
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-
+    
     <title>FIFA</title>
 </head>
 
@@ -28,7 +28,7 @@ echo "$nombresa";
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
-
+   
     <!--Main Navigation-->
     <header>
         <!-- Navbar -->
@@ -180,80 +180,39 @@ echo "$nombresa";
                         <a name="ingresar"></a>
                         <form method="POST">
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bombo 1</label>
-                                <select class="form-select" id="pais1" name="pais1" aria-label="Default select example">
-                                    <option selected>Selecci&oacute;n</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Qatar</option>
-                                    <option value="Inglaterra-./img/ENG.webp-1">Inglaterra</option>
-                                    <option value="Argentina-./img/ARG.webp-2">Argentina</option>
-                                    <option value="Francia-./img/FRA.webp-1-4">Francia</option>
-                                    <option value="Espa&ntilde;a-./img/ESP.avif-1">Espa&ntilde;a</option>
-                                    <option value="B&eacute;lgica-./img/BEL.webp-1">B&eacute;lgica</option>
-                                    <option value="Brasil-./img/BRA.avif-2">Brasil</option>
-                                    <option value="Portugal-./img/POR.avif-1">Portugal</option>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
                                 </select>
                             </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bombo 2</label>
-                                <select class="form-select" id="pais2" name="pais2" aria-label="Default select example">
-                                    <option selected>Selecci&oacute;n</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Ecuador</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Ir&aacute;n</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Arabia Saud&iacute;</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Pendiente</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Pendiente</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Canad&aacute;</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Serbia</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Ghana</option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bombo 3</label>
-                                <select class="form-select" id="pais3" name="pais3" aria-label="Default select example">
-                                    <option selected>Selecci&oacute;n</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Senegal</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Estados Unidos</option>
-                                    <option value="Qatar-./img/QAT.webp-4">M&eacute;xico</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Dinamarca</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Alemania</option>
-                                    <option value="3">Marruecos</option>
-                                    <option value="3">Suiza</option>
-                                    <option value="3">Uruguay</option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bombo 4</label>
-                                <select class="form-select" id="pais4" name="pais4" aria-label="Default select example">
-                                    <option selected>Selecci&oacute;n</option>
-                                    <option value="1">Paises Bajos</option>
-                                    <option value="2">Escocia</option>
-                                    <option value="3">Polonia</option>
-                                    <option value="3">Tunez</option>
-                                    <option value="3">Japon</option>
-                                    <option value="3">Croacia</option>
-                                    <option value="3">Camer&uacute;n</option>
-                                    <option value="3">Corea del Sur</option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Grupo</label>
-                                <select class="form-select" id="grupo" name="grupo" multiple aria-label="multiple select example">
-                                    <option selected>Seleccione el grupo a crear</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                    <option value="H">H</option>
-                                </select>
-                            </div>
+                            <br>
                             <!-- Submit button -->
                             <button type="submit" name="login" class="btn btn-primary btn-block mb-4">
                                 Sign in
                             </button>
+                            <br>
 
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <p>or sign in with:</p>
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
                         </form>
                     </div>
 
