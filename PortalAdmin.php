@@ -1,5 +1,5 @@
 <?php
-//include('conn.php');
+include('conn.php');
 session_start();
 $nombresa = $_SESSION['nombre_usuario'];
 echo "$nombresa";
@@ -178,7 +178,7 @@ echo "$nombresa";
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
-                        <form method="POST">
+                        <form action="PortalAdmin.php" method="POST">
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Bombo 1</label>
                                 <select class="form-select" id="pais1" name="pais1" aria-label="Default select example">
@@ -197,42 +197,42 @@ echo "$nombresa";
                                 <label class="form-label" for="form3Example3">Bombo 2</label>
                                 <select class="form-select" id="pais2" name="pais2" aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Ecuador</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Ir&aacute;n</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Arabia Saud&iacute;</option>
+                                    <option value="Ecuador-./img/ECU.avif-2">Ecuador</option>
+                                    <option value="Ir&aacute;n-./img/IRN.webp-4">Ir&aacute;n</option>
+                                    <option value="Arabia Saud&iacute;-./img/KSA.webp-4">Arabia Saud&iacute;</option>
                                     <option value="Qatar-./img/QAT.webp-4">Pendiente</option>
                                     <option value="Qatar-./img/QAT.webp-4">Pendiente</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Canad&aacute;</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Serbia</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Ghana</option>
+                                    <option value="Canad&aacute;-./img/CAN.webp-3">Canad&aacute;</option>
+                                    <option value="Serbia-./img/SRB.avif-1">Serbia</option>
+                                    <option value="Ghana-./img/QAT.webp-6">Ghana</option>
                                 </select>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Bombo 3</label>
                                 <select class="form-select" id="pais3" name="pais3" aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Senegal</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Estados Unidos</option>
-                                    <option value="Qatar-./img/QAT.webp-4">M&eacute;xico</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Dinamarca</option>
-                                    <option value="Qatar-./img/QAT.webp-4">Alemania</option>
-                                    <option value="3">Marruecos</option>
-                                    <option value="3">Suiza</option>
-                                    <option value="3">Uruguay</option>
+                                    <option value="Qatar-./img/QAT.webp-6">Senegal</option>
+                                    <option value="USA-./img/QAT.webp-3">Estados Unidos</option>
+                                    <option value="M&eacute;xico-./img/MEX.avif-3">M&eacute;xico</option>
+                                    <option value="Dinamarca-./img/DEN.webp-1">Dinamarca</option>
+                                    <option value="Alemania-./img/GER.avif-1">Alemania</option>
+                                    <option value="Marruecos-./img/MAR.webp-6">Marruecos</option>
+                                    <option value="Suiza-./img/SUI.webp-1">Suiza</option>
+                                    <option value="Uruguay-./img/URU.webp-2">Uruguay</option>
                                 </select>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Bombo 4</label>
                                 <select class="form-select" id="pais4" name="pais4" aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
-                                    <option value="1">Paises Bajos</option>
-                                    <option value="2">Escocia</option>
-                                    <option value="3">Polonia</option>
-                                    <option value="3">Tunez</option>
-                                    <option value="3">Japon</option>
-                                    <option value="3">Croacia</option>
-                                    <option value="3">Camer&uacute;n</option>
-                                    <option value="3">Corea del Sur</option>
+                                    <option value="Dinamarca-./img/DEN.webp-1">Paises Bajos</option>
+                                    <option value="Escocia-./img/DEN.webp-1">Escocia</option>
+                                    <option value="Polonia-./img/POL.webp-1">Polonia</option>
+                                    <option value="Tunez-./img/TUN.webp-6">Tunez</option>
+                                    <option value="Jap&oacute;n-./img/JPN.webp-4">Japon</option>
+                                    <option value="Croacia-./img/CRO.webp-1">Croacia</option>
+                                    <option value="Camer&uacute;n-./img/CMR.webp-6">Camer&uacute;n</option>
+                                    <option value="Corea del Sur-./img/KOR.avif-4">Corea del Sur</option>
                                 </select>
                             </div>
                             <div class="form-outline mb-4">
@@ -250,8 +250,8 @@ echo "$nombresa";
                                 </select>
                             </div>
                             <!-- Submit button -->
-                            <button type="submit" name="login" class="btn btn-primary btn-block mb-4">
-                                Sign in
+                            <button type="submit" name="Crear" class="btn btn-primary btn-block mb-4">
+                                Agregar
                             </button>
 
                         </form>
@@ -260,7 +260,59 @@ echo "$nombresa";
                 </div>
             </section>
             <!--Section: Content-->
+            <?php
+                if (isset($_POST['crear'])) {
 
+                    $nombre = $_POST['nombre'];
+                    $apellido = $_POST['apellido'];
+                    $username = $_POST['usuario'];
+                    $passwords = $_POST['password'];
+                    $rol = "U";
+                    $trabajoono = true;
+                    if (isset($_POST["isadmin"])) {
+                        $rol = $_POST["isadmin"];
+
+                        $codadmin = $_POST['codadmin'];
+                        if ($codadmin == "adminmero") {
+                            $trabajoono = true;
+                        } else {
+                            echo '<div class="alert alert-warning" role="alert">Solo el administrador puede otorgar este rol</div>';
+                            $trabajoono = false;
+                        }
+                    }
+
+                    $acum = 0;
+                    if ($trabajoono) {
+                        $link = pg_connect("$host $port $dbname $user $password") or die('Could not connect: ' . " error de conexion");
+                        $query = "SELECT * FROM usuarios WHERE usuario='$username'";
+                        $result = pg_query($link, $query) or die('Query failed: ' . pg_last_error($link));
+                        $makeorno = true;
+                        while ($line = pg_fetch_array($result)) {
+                            $userr = $line['usuario'];
+                            $passr = $line['contra'];
+                            $nomr = $line['nombre'];
+                            $apr = $line['apellido'];
+                            $rolr = $line['rol'];
+                            $acumr = $line['acumulado'];
+                            if ($username == $userr) {
+                                $makeorno = false;
+                                echo '<div class="alert alert-warning" role="alert">The email address is already registered!</div>';
+                            }
+                        }
+                        if ($makeorno) {
+                            $query2 = "INSERT INTO usuarios VALUES ('$username','$passwords','$nombre','$apellido','$rol',$acum)";
+                            $result2 = pg_query($link, $query2);
+                            if (!$result2) {
+                                echo pg_last_error($dbconn);
+                            } else {
+                                echo '<div class="alert alert-success" role="alert">
+                                    Dato Insertado Correctamente!
+                                    </div>';
+                            }
+                        }
+                    }
+                }
+            ?>
         </div>
     </main>
     <!--Main layout-->

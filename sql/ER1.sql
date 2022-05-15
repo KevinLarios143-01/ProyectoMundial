@@ -22,6 +22,8 @@ INSERT INTO Federacion VALUES (2,'CONMEBOL');
 INSERT INTO Federacion VALUES (3,'CONCACAF');
 INSERT INTO Federacion VALUES (4,'AFC');
 INSERT INTO Federacion VALUES (5,'OFC');
+INSERT INTO Federacion VALUES ('CAF');
+
 
 CREATE TABLE Grupo(
 	cod_grupo int,
