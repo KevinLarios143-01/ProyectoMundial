@@ -171,6 +171,7 @@ require('conn.php');
                 </h4>
                 <div class="row d-flex justify-content-center">
                     <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">Todos</button>
                         <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">A</button>
                         <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">B</button>
                         <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">C</button>
@@ -179,7 +180,6 @@ require('conn.php');
                         <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">F</button>
                         <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">G</button>
                         <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">H</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">Todos</button>
                     </div>
                 </div><br><br>
                 <div class="row d-flex justify-content-center">

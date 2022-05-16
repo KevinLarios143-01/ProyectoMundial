@@ -52,6 +52,14 @@ CREATE TABLE Lugar(
 	PRIMARY KEY (cod_lugar)
 );
 
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'LUSAIL');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'AL JANOUB');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, '974');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'AL THUMAMA');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'INTERNACIONAL KHALIFA');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, '0CIUDAD DE LA EDUCACION');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'AHMED BIN ALI');
+
 CREATE TABLE Partidos(
 	num_partido SERIAL,
 	cod_lugar int,

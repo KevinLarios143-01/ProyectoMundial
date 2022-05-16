@@ -28,6 +28,7 @@ $nombresa = $_SESSION['nombre_usuario'];
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
 
+
     <!--Main Navigation-->
     <header>
         <!-- Navbar -->
@@ -166,33 +167,111 @@ $nombresa = $_SESSION['nombre_usuario'];
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-    <!--Main layout-->
+    <a name="ingreso"></a>
     <main class="mt-5">
-        <a name="content"></a>
+        <!--Section: Content-->
         <hr class="my-5" />
         <div class="container">
-            <!--Section: Content-->
-
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>Panel de Control</strong>
+                    <strong>Estadios</strong>
                 </h4>
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $query_estadios = "SELECT * FROM lugar";
+                            $result_estadios = pg_query($link,$query_estadios) or die('Query failed: ' . pg_last_error($link));
+                            $makeorno=true;
+                            while ($line = pg_fetch_array($result_estadios)) {
+                                $cod = $line['cod_lugar'];
+                                $nombre=$line['nombre_estadio'];
+                                echo "<tr>
+                                        <th scope='row'>$cod</th>
+                                        <td>$nombre</td>
+                                    </tr>";
+                            }
+                        ?>
+                    </tbody>
 
+                </table><br>
+                <hr class="my-5" />
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
-                        <div class="list-group list-group-light">
-                            <a href="./PortalAdmin.php" class="list-group-item list-group-item-action px-3 border-0 active" aria-current="true">Panel de Control</a>
-                            <a href="./CrearPartido.php" class="list-group-item list-group-item-action px-3 border-0 ">Crear Partidos</a>
-                            <a href="./Estadios.php" class="list-group-item list-group-item-action px-3 border-0">Estadios</a>
-                            <a href="#" class="list-group-item list-group-item-action px-3 border-0">Eliminatorias</a>
-                            <a href="./Sorteo.php" class="list-group-item list-group-item-action px-3 border-0">Crear Grupos</a>
-                        </div>
-                    </div>
-                </div>
+                        <a name="ingresar"></a>
+                        <form action="Estadios.php" method="POST">
+                            <!-- Name input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="nombre_e" class="form-control" />
+                                <label class="form-label" for="nombre_e">Nombre</label>
+                            </div>
+                            <!-- Checkbox -->
+                            <div class="form-check d-flex justify-content-center mb-4">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="form5Example3" checked />
+                                <label class="form-check-label" for="form5Example3">
+                                    Pertenece a Qatar
+                                </label>
+                            </div>
 
+                            <!-- Submit button -->
+                            <button type="submit" name="agregar" class="btn btn-primary btn-block mb-4">Agregar</button>
+                        </form>
+                    </div>
+
+                </div>
             </section>
             <!--Section: Content-->
+            <?php
+                if (isset($_POST['agregar'])) {
+                    $nombre_e = "";
+                    
+                    $trabajoono = false;
+                    if (isset($_POST["nombre_e"])) {
+                        $nombre_e=$_POST["nombre_e"];
+                        //particiones
+                        $trabajoono = true;
+                    }
 
+                    if($trabajoono){
+                        
+                    }    
+                
+                }
+                
+                //separando valores de variables
+                function verificar_existencia($querys, $links)
+                {
+                    $makeornos = false;
+                    $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+                    $verify_exist = pg_num_rows($result);
+
+                    if ($verify_exist > 0) {
+                        $makeornos = false;
+                        echo '<div class="alert alert-warning" role="alert">Este equipo ya esta participando!</div>';
+                    } else {
+                        $makeornos = true;
+                    }
+                    return $makeornos;
+                }
+
+                function val_id($querys, $links)
+                {
+                    $id = 0;
+                    $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+
+                    while ($line = pg_fetch_array($result)) {
+                        $id = $line['ids'];
+                    }
+                    return $id;
+                }
+
+
+            ?>
         </div>
     </main>
     <!--Main layout-->
@@ -200,8 +279,8 @@ $nombresa = $_SESSION['nombre_usuario'];
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
-            <a role="button" class="btn btn-primary btn-lg m-2" href="./salir.php" rel="nofollow">
-                Ir a Inicio
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./PortalAdmin.php#content">
+                Panel de Control
             </a>
         </div>
 
