@@ -2,7 +2,6 @@
     require('conn.php');
     session_start();
     $nombresa = $_SESSION['nombre_usuario'];
-    $disabled1="disabled";
 ?>
 <!doctype html>
 <html lang="en">
@@ -181,42 +180,41 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
+                        <?php 
+                            $lugar="";
+                            $hora="";
+                            $fecha="";
+                            $fase="";
+                            $grupo=1;
+                            if(isset($_POST['enviar'])){
+                                if(isset($_POST['lugar'])&&isset($_POST['hora'])&&isset($_POST['fecha'])&&isset($_POST['fase'])&&isset($_POST['grupo'])){
+                                    $lugar=$_POST['lugar'];
+                                    $hora=$_POST['hora'];
+                                    $fecha=$_POST['fecha'];
+                                    $fase=$_POST['fase'];
+                                    $grupo=$_POST['grupo'];
+                                }
+                            }
+                        ?>
 
                         <form action="CrearPartidoYa.php" method="POST">
-                            <!-- Lugar input -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="lugar" name="lugar" aria-label="select example">
-                                            <option selected>Seleccione el estadio</option>
-                                            <?php
-                                            $cod_lugar = 0;
-                                            $nombre_lugar = "";
-                                            $que = "SELECT * FROM lugar ORDER BY cod_lugar ASC";
-                                            $res = pg_query($link, $que) or die('Query failed: ' . pg_last_error($link));
-                                            while ($line = pg_fetch_array($res)) {
-                                                $cod_lugar = $line["cod_lugar"];
-                                                $nombre_lugar = $line["nombre_estadio"];
-                                                echo "<option value='$cod_lugar'>$nombre_lugar</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                        <label class="form-label" for="lugar">Lugar</label>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- 2 column grid layout with text inputs for the first and last names -->
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="time" id="hora" name="hora" class="form-control" />
-                                        <label for="hora">Hora</label>
+                                        <input type="hidden" id="lugar" name="lugar" class="form-control" value="<?php echo "$lugar"; ?>" />
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-floating">
-                                        <input type="date" id="fecha" name="fecha" class="form-control" />
-                                        <label for="fecha">Fecha</label>
+                                        <input type="hidden" id="hora" name="hora" class="form-control" value="<?php echo "$hora"; ?>"/>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="hidden" id="fecha" name="fecha" class="form-control" value="<?php echo "$fecha"; ?>"/>
+
                                     </div>
                                 </div>
                             </div>
@@ -224,38 +222,71 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <select class="form-select" id="fase" name="fase" aria-label="multiple select example">
-                                            <option selected>Fase</option>
-                                            <option value="G">Grupos</option>
-                                            <option value="E" disabled>Eliminatorias</option>
-                                        </select>
-                                        <label class="form-label" for="fase">FASE</label>
+                                        <input type="hidden" id="fase" name="fase" class="form-control" value="<?php echo "$fase"; ?>"/>
                                     </div>
                                 </div>
-
                                 <div class="col">
                                     <div class="form-floating">
-                                        <select class="form-select" id="grupo" name="grupo" aria-label="multiple select example">
-                                            <option selected>Grupo</option>
-                                            <option value="1">A</option>
-                                            <option value="2">B</option>
-                                            <option value="3">C</option>
-                                            <option value="4">B</option>
-                                            <option value="5">D</option>
-                                            <option value="6">E</option>
-                                            <option value="7">F</option>
-                                            <option value="8">G</option>
-                                        </select>
-                                        <label class="form-label" for="fase">FASE</label>
+                                        <input type="hidden" id="grupo" name="grupo" class="form-control" value="<?php echo "$grupo"; ?>"/>
                                     </div>
                                 </div>
                             </div>
-                            
+                            <!-- Participantes input -->
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="pais1" name="pais1" aria-label="multiple select example">
+                                            <option selected>Participante 1</option>
+                                            <?php
+                                                $cod_participante = 0;
+                                                $nombre_participante = "";
+                                                $logo="";
+                                                $que = "SELECT * FROM participantes WHERE cod_grupo='$grupo' ORDER BY cod_participante ASC";
+                                                $res = pg_query($link, $que) or die('Query failed: ' . pg_last_error($link));
+                                                while ($line = pg_fetch_array($res)) {
+                                                    $cod_participante = $line["cod_participante"];
+                                                    $nombre_participante = $line["nombre_participante"];
+                                                    $line["bombo"];
+                                                    $logo=$line["text"];
+                                                    $line["cod_federacion"];
+                                                    $line["cod_grupo"];
+                                                    echo "<option value='$cod_participante'>$nombre_participante</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <label class="form-label" for="fase">Equipo</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="pais2" name="pais2" aria-label="multiple select example">
+                                            <option selected>Participante 2</option>
+                                            <?php
+                                                $cod_participante1 = 0;
+                                                $nombre_participante1 = "";
+                                                $logo1="";
+                                                $que1 = "SELECT * FROM participantes WHERE cod_grupo='$grupo' ORDER BY cod_participante ASC";
+                                                $res1 = pg_query($link, $que1) or die('Query failed: ' . pg_last_error($link));
+                                                while ($line = pg_fetch_array($res1)) {
+                                                    $cod_participante1 = $line["cod_participante"];
+                                                    $nombre_participante1 = $line["nombre_participante"];
+                                                    $line["bombo"];
+                                                    $logo1=$line["text"];
+                                                    $line["cod_federacion"];
+                                                    $line["cod_grupo"];
+                                                    echo "<option value='$cod_participante1'>$nombre_participante1</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                        <label class="form-label" for="fase">Equipo</label>
+                                    </div>
+                                </div>
+                            </div>
 
                             
                             <!-- Submit button -->
-                            <button type="submit" name="enviar" class="btn btn-primary btn-block mb-4">
-                                Agregar
+                            <button type="submit" name="crear" class="btn btn-primary btn-block mb-4">
+                                Crear Partido
                             </button>
 
                         </form>
@@ -264,6 +295,104 @@
                 </div>
             </section>
             <!--Section: Content-->
+            <?php
+                $pais1 = "";
+                $pais2 = "";
+                if (isset($_POST['crear'])) {
+
+                    $trabajoono = false;
+                    if (isset($_POST["pais1"]) && isset($_POST["pais2"])) {
+                        $lugar=$_POST['lugar'];
+                        $hora=$_POST['hora'];
+                        $fecha=$_POST['fecha'];
+                        $fase=$_POST['fase'];
+                        $grupo=$_POST['grupo'];
+                        $pais1 = $_POST["pais1"];
+                        $pais2 = $_POST["pais2"];
+                        $trabajoono = true;
+                    }
+
+                    if ($trabajoono) {
+                        $makeorno1 = false;
+                        $makeorno2 = false;
+                        
+                        $verificacion1 = "SELECT * FROM partidos WHERE cod_participante1=$pais1 and cod_participante2=$pais2;";
+                        $makeorno1 = verificar_existencia($verificacion1, $link);
+                        $verificacion2 = "SELECT * FROM partidos WHERE cod_participante1=$pais2 and cod_participante2=$pais1";
+                        $makeorno2 = verificar_existencia($verificacion2, $link);
+
+                        /*$verificar_traslape = "SELECT count(*) AS grupos
+                                                FROM participantes P, grupo G
+                                                WHERE P.cod_grupo=$grupo and G.cod_grupo=$grupo;";*/
+
+                        //$hacer = verificar_espacios($verificar_grupo_lleno, $link);
+                        $hacer=true;
+                        if ($makeorno1 && $hacer) {
+                            //$id++;
+                            echo "\n $lugar $hora $fecha $fase $grupo";
+                            $insert = "INSERT INTO partidos VALUES (DEFAULT,$lugar,'$hora','$fecha',$pais1,$pais2,0,0,'$fase')";
+                            $resultado = pg_query($link, $insert);
+                            if (!$resultado) {
+                                echo pg_last_error($dbconn);
+                            } else {
+                                echo '<div class="alert alert-success" role="alert">
+                                        Datos Insertado Correctamente!
+                                        </div>';
+                            }
+                        }
+                    }
+                }
+                //separando valores de variables
+                function verificar_existencia($querys, $links)
+                {
+                    $makeornos = false;
+                    $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+                    $verify_exist = pg_num_rows($result);
+
+                    if ($verify_exist > 0) {
+                        $makeornos = false;
+                        echo '<div class="alert alert-warning" role="alert">Este equipo ya esta participando!</div>';
+                    } else {
+                        $makeornos = true;
+                    }
+                    return $makeornos;
+                }
+
+                function verificar_espacios($querys, $links)
+                {
+                    $makeornos = false;
+                    $id = 0;
+                    $resultss = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+
+                    while ($line = pg_fetch_array($resultss)) {
+                        $id = $line['grupos'];
+                    }
+                    if ($id == 0) {
+                        $makeornos = true;
+                    } else {
+                        echo '<div class="alert alert-warning" role="alert">Este grupo ya esta lleno!</div>';
+                    }
+
+                    return $makeornos;
+                }
+
+                function val_id($querys, $links)
+                {
+                    $id = 0;
+                    $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+
+                    while ($line = pg_fetch_array($result)) {
+                        $id = $line['ids'];
+                    }
+                    return $id;
+                }
+                function repartir($pais)
+                {
+                    $lista = explode("-", $pais);
+                    return $lista;
+                }
+
+            ?>
         </div>
     </main>
     <!--Main layout-->

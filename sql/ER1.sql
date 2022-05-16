@@ -65,6 +65,7 @@ CREATE TABLE Partidos(
 	cod_lugar int,
 	hora time,
 	fecha date,
+	fase char,
 	cod_participante1 int unique,
 	cod_participante2 int unique,
 	marcador1 int,
@@ -72,7 +73,8 @@ CREATE TABLE Partidos(
 	PRIMARY KEY (num_partido),
 	FOREIGN KEY (cod_participante1) REFERENCES Participantes(cod_participante),
 	FOREIGN KEY (cod_participante2) REFERENCES Participantes(cod_participante),
-	FOREIGN KEY (cod_lugar) REFERENCES Lugar(cod_lugar)
+	FOREIGN KEY (cod_lugar) REFERENCES Lugar(cod_lugar),
+	CHECK(fase in ('G','E'))
 );
 
 CREATE TABLE Usuarios(

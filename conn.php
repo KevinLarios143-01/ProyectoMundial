@@ -5,4 +5,10 @@
     $user = "user=postgres";
     $password = "password=1234";
     $link = pg_connect("$host $port $dbname $user $password")or die('Could not connect: '. " error de conexion");
+    $disabled1="disabled";
+    $lugar="";
+    $hora="";
+    $fecha="";
+    $fase="";
+    $grupo=1;
 ?>
