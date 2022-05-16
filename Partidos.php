@@ -1,9 +1,5 @@
 <?php
-    $host = "host=localhost";
-    $port = "port=5432";
-    $dbname = "dbname=Mundial";
-    $user = "user=postgres";
-    $password = "password=1234";
+require('conn.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,13 +40,13 @@
                 <div class="collapse navbar-collapse" id="navbarExample01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="Grupos.php">Grupos</a>
+                            <a class="nav-link" aria-current="page" href="./Grupos.php">Grupos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Partidos.php" rel="nofollow" >Partidos</a>
+                            <a class="nav-link" href="./Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Resultados.php" >Resultados</a>
+                            <a class="nav-link" href="./Resultados.php">Resultados</a>
                         </li>
                     </ul>
 
@@ -105,8 +101,8 @@
                                 <h5 class="mb-4">
                                     21 de noviembre - 17 de diciembre
                                 </h5>
-                                <a class="btn btn-outline-light btn-lg m-2" href="#ingresar" role="button" rel="nofollow">Quinielas</a>
-                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" target="_blank" role="button">Registrarse</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis"  role="button">Registrarse</a>
                             </div>
                         </div>
                     </div>
@@ -141,7 +137,7 @@
                         <div class="d-flex justify-content-center align-items-center h-100">
                             <div class="text-white text-center">
                                 <h2>¿Eres administrador?</h2>
-                                <a class="btn btn-outline-light btn-lg m-2" href="Admin.php#ingreso" target="_blank" role="button">Ingresar</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./Admin.php#ingreso" target="_blank" role="button">Ingresar</a>
                             </div>
                         </div>
                     </div>
@@ -162,20 +158,30 @@
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
-    <hr class="my-5" />
+    <!--Main layout-->
+    <main class="mt-5">
+        <a name="content"></a>
+        <hr class="my-5" />
+        <div class="container">
+            <!--Section: Content-->
+            <section>
+
+            </section>
+            <!--Section: Content-->
+
+        </div>
+    </main>
+    <!--Main layout-->
 
 
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.youtube.com/fifa" rel="nofollow" target="_blank">
-                Calendario de Partidos
-            </a>
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.facebook.com/fifaworldcup/" target="_blank">
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./Grupos.php#content" rel="nofollow">
                 Grupos
+            </a>
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./Resultados.php#content">
+                Resultados
             </a>
         </div>
 

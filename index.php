@@ -321,10 +321,10 @@
   <!--Footer-->
   <footer class="bg-light text-lg-start">
     <div class="py-4 text-center">
-      <a role="button" class="btn btn-primary btn-lg m-2" href="#" rel="nofollow" >
+      <a role="button" class="btn btn-primary btn-lg m-2" href="./Partidos.php#content" rel="nofollow" >
         Calendario de Partidos
       </a>
-      <a role="button" class="btn btn-primary btn-lg m-2" href="#">
+      <a role="button" class="btn btn-primary btn-lg m-2" href="./Grupos.php#content">
         Grupos
       </a>
     </div>

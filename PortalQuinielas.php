@@ -1,5 +1,5 @@
 <?php
-    //include('conn.php');
+    include('conn.php');
     session_start();
 ?>
 <!doctype html>
@@ -159,69 +159,7 @@
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
-    <a name="ingreso"></a>
-    <main class="mt-5">
-        <!--Section: Content-->
-        <hr class="my-5" />
-        <div class="container">
-            <section class="mb-5">
-                <h4 class="mb-5 text-center">
-                    <strong>Ingresar a Sistema</strong>
-                </h4>
 
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-6">
-                        <a name="ingresar"></a>
-                        <form method="POST">
-                            <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                <input type="text" name="user" id="user" class="form-control" />
-                                <label class="form-label" for="form3Example3">Usuario</label>
-                            </div>
-
-                            <!-- Password input -->
-                            <div class="form-outline mb-4">
-                                <input type="password" name="pass" id="pass" class="form-control" />
-                                <label class="form-label" for="form3Example4">Contrase&ntilde;a</label>
-                            </div>
-
-
-                            <!-- Submit button -->
-                            <button type="submit" name="login" class="btn btn-primary btn-block mb-4">
-                                Sign in
-                            </button>
-
-                            <!-- Register buttons -->
-                            <div class="text-center">
-                                <p>or sign in with:</p>
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-facebook-f"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-google"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-github"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </section>
-            <!--Section: Content-->
-        </div>
-    </main>
-    <!--Main layout-->
 
     <!--Footer-->
     <footer class="bg-light text-lg-start">

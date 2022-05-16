@@ -2,17 +2,10 @@
 
 -- DROP DATABASE IF EXISTS mundial;
 
-CREATE DATABASE mundial
-    WITH 
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'C'
-    LC_CTYPE = 'C'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
+CREATE DATABASE Mundial;
 	
 CREATE TABLE Federacion(
-	cod_federacion int,
+	cod_federacion serial,
 	nombre_federacion varchar(30),
 	PRIMARY KEY (cod_federacion)
 );
@@ -26,7 +19,7 @@ INSERT INTO Federacion VALUES ('CAF');
 
 
 CREATE TABLE Grupo(
-	cod_grupo int,
+	cod_grupo serial,
 	nombre_grupo char(1),
 	PRIMARY KEY (cod_grupo)
 );
@@ -53,7 +46,7 @@ CREATE TABLE Participantes(
 );
 
 CREATE TABLE Partidos(
-	num_partido int,
+	num_partido SERIAL,
 	lugar varchar(50),
 	hora time,
 	fecha date,
@@ -78,7 +71,7 @@ CREATE TABLE Usuarios(
 );
 
 CREATE TABLE Quinielas(
-	cod_quiniela int,
+	cod_quiniela SERIAL,
 	M_1 int,
 	M_2 int,
 	usuario varchar(25),

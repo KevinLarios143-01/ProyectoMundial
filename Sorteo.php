@@ -1,8 +1,7 @@
 <?php
-    //include('conn.php');
-    session_start();
-    $nombresa = $_SESSION['nombre_usuario'];
-    echo "$nombresa";
+include('conn.php');
+session_start();
+$nombresa = $_SESSION['nombre_usuario'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-    
+
     <title>FIFA</title>
 </head>
 
@@ -28,7 +27,8 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
-   
+
+
     <!--Main Navigation-->
     <header>
         <!-- Navbar -->
@@ -44,13 +44,13 @@
                 <div class="collapse navbar-collapse" id="navbarExample01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="Grupos.php">Grupos</a>
+                            <a class="nav-link" aria-current="page" href="./Grupos.php">Grupos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
+                            <a class="nav-link" href="./Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Resultados.php">Resultados</a>
+                            <a class="nav-link" href="./Resultados.php">Resultados</a>
                         </li>
                     </ul>
 
@@ -93,8 +93,32 @@
 
             <!-- Inner -->
             <div class="carousel-inner">
+
+
                 <!-- Single item -->
-                <div class="carousel-item active">
+                <div class="carousel-item  active">
+                    <video style="min-width: 100%; min-height: 100%" playsinline autoplay muted loop>
+                        <source class="h-100" src="./media/video3.mp4" type="video/mp4" />
+                    </video>
+                    <div class="mask" style="
+                  background: linear-gradient(
+                  45deg,
+                  rgba(29, 236, 197, 0.7),
+                  rgba(91, 14, 214, 0.7) 100%
+                  );
+                  ">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <div class="text-white text-center">
+                                <h1 class="mb-3">Copa Mundial de la FIFA Catar 2022&trade;</h1>
+                                <h2>Bienvenido</h2>
+                                <h4><?php echo "$nombresa"; ?></h4>
+                                <a class="btn btn-outline-light btn-lg m-2" href="salir.php" role="button">Salir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single item -->
+                <div class="carousel-item">
                     <video style="min-width: 100%; min-height: 100%" playsinline autoplay muted loop>
                         <source class="h-100" src="./media/video1.mp4" type="video/mp4" />
                     </video>
@@ -105,8 +129,8 @@
                                 <h5 class="mb-4">
                                     21 de noviembre - 17 de diciembre
                                 </h5>
-                                <a class="btn btn-outline-light btn-lg m-2" href="#ingresar" role="button" rel="nofollow">Quinielas</a>
-                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" target="_blank" role="button">Registrarse</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" role="button">Registrarse</a>
                             </div>
                         </div>
                     </div>
@@ -126,26 +150,7 @@
                     </div>
                 </div>
 
-                <!-- Single item -->
-                <div class="carousel-item">
-                    <video style="min-width: 100%; min-height: 100%" playsinline autoplay muted loop>
-                        <source class="h-100" src="./media/video3.mp4" type="video/mp4" />
-                    </video>
-                    <div class="mask" style="
-                  background: linear-gradient(
-                  45deg,
-                  rgba(29, 236, 197, 0.7),
-                  rgba(91, 14, 214, 0.7) 100%
-                  );
-                  ">
-                        <div class="d-flex justify-content-center align-items-center h-100">
-                            <div class="text-white text-center">
-                                <h2>¿Eres administrador?</h2>
-                                <a class="btn btn-outline-light btn-lg m-2" href="Admin.php#ingreso" target="_blank" role="button">Ingresar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <!-- Inner -->
 
@@ -162,9 +167,6 @@
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
     <a name="ingreso"></a>
     <main class="mt-5">
         <!--Section: Content-->
@@ -178,48 +180,213 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
-                        <form method="POST">
+                        <form action="PortalAdmin.php" method="POST">
                             <div class="form-outline mb-4">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <label class="form-label" for="form3Example3">Bombo 1</label>
+                                <select class="form-select" id="pais1" name="pais1" aria-label="Default select example">
+                                    <option selected>Selecci&oacute;n</option>
+                                    <option value="Qatar-./img/QAT.webp-4">Qatar</option>
+                                    <option value="Inglaterra-./img/ENG.webp-1">Inglaterra</option>
+                                    <option value="Argentina-./img/ARG.webp-2">Argentina</option>
+                                    <option value="Francia-./img/FRA.webp-1-4">Francia</option>
+                                    <option value="Espa&ntilde;a-./img/ESP.avif-1">Espa&ntilde;a</option>
+                                    <option value="B&eacute;lgica-./img/BEL.webp-1">B&eacute;lgica</option>
+                                    <option value="Brasil-./img/BRA.avif-2">Brasil</option>
+                                    <option value="Portugal-./img/POR.avif-1">Portugal</option>
                                 </select>
                             </div>
-                            <br>
-                            <!-- Submit button -->
-                            <button type="submit" name="login" class="btn btn-primary btn-block mb-4">
-                                Sign in
-                            </button>
-                            <br>
-
-                            <!-- Register buttons -->
-                            <div class="text-center">
-                                <p>or sign in with:</p>
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-facebook-f"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-google"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-github"></i>
-                                </button>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">Bombo 2</label>
+                                <select class="form-select" id="pais2" name="pais2" aria-label="Default select example">
+                                    <option selected>Selecci&oacute;n</option>
+                                    <option value="Ecuador-./img/ECU.avif-2">Ecuador</option>
+                                    <option value="Ir&aacute;n-./img/IRN.webp-4">Ir&aacute;n</option>
+                                    <option value="Arabia Saud&iacute;-./img/KSA.webp-4">Arabia Saud&iacute;</option>
+                                    <option value="Costa&nbsp;Rica-./img/QAT.webp-4">Costa Rica</option>
+                                    <option value="Australia-./img/QAT.webp-4">Australia</option>
+                                    <option value="Canad&aacute;-./img/CAN.webp-3">Canad&aacute;</option>
+                                    <option value="Serbia-./img/SRB.avif-1">Serbia</option>
+                                    <option value="Ghana-./img/QAT.webp-6">Ghana</option>
+                                </select>
                             </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">Bombo 3</label>
+                                <select class="form-select" id="pais3" name="pais3" aria-label="Default select example">
+                                    <option selected>Selecci&oacute;n</option>
+                                    <option value="Senegal-./img/SEN.avif-6">Senegal</option>
+                                    <option value="USA-./img/QAT.webp-3">Estados Unidos</option>
+                                    <option value="M&eacute;xico-./img/MEX.avif-3">M&eacute;xico</option>
+                                    <option value="Dinamarca-./img/DEN.webp-1">Dinamarca</option>
+                                    <option value="Alemania-./img/GER.avif-1">Alemania</option>
+                                    <option value="Marruecos-./img/MAR.webp-6">Marruecos</option>
+                                    <option value="Suiza-./img/SUI.webp-1">Suiza</option>
+                                    <option value="Uruguay-./img/URU.webp-2">Uruguay</option>
+                                </select>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">Bombo 4</label>
+                                <select class="form-select" id="pais4" name="pais4" aria-label="Default select example">
+                                    <option selected>Selecci&oacute;n</option>
+                                    <option value="Paises&nbsp;Bajos-./img/NED.webp-1">Paises Bajos</option>
+                                    <option value="Escocia-./img/DEN.webp-1">Escocia</option>
+                                    <option value="Polonia-./img/POL.webp-1">Polonia</option>
+                                    <option value="Tunez-./img/TUN.webp-6">Tunez</option>
+                                    <option value="Jap&oacute;n-./img/JPN.webp-4">Japon</option>
+                                    <option value="Croacia-./img/CRO.webp-1">Croacia</option>
+                                    <option value="Camer&uacute;n-./img/CMR.webp-6">Camer&uacute;n</option>
+                                    <option value="Corea del Sur-./img/KOR.avif-4">Corea del Sur</option>
+                                </select>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3">Grupo</label>
+                                <select class="form-select" id="grupo" name="grupo" multiple aria-label="multiple select example">
+                                    <option selected>Seleccione el grupo a crear</option>
+                                    <option value="1">A</option>
+                                    <option value="2">B</option>
+                                    <option value="3">C</option>
+                                    <option value="4">D</option>
+                                    <option value="5">E</option>
+                                    <option value="6">F</option>
+                                    <option value="7">G</option>
+                                    <option value="8">H</option>
+                                </select>
+                            </div>
+                            <!-- Submit button -->
+                            <button type="submit" name="crear" class="btn btn-primary btn-block mb-4">
+                                Agregar
+                            </button>
+
                         </form>
                     </div>
 
                 </div>
             </section>
             <!--Section: Content-->
+            <?php
+            if (isset($_POST['crear'])) {
+                $rol = "";
+                $pais1 = "";
+                $pais2 = "";
+                $pais3 = "";
+                $pais4 = "";
+                $grupo = "";
+                $lista1 = array();
+                $lista2 = array();
+                $lista3 = array();
+                $lista4 = array();
+                $trabajoono = false;
+                if (isset($_POST["pais1"]) && isset($_POST["pais2"]) && isset($_POST["pais3"]) && isset($_POST["pais4"]) && isset($_POST["grupo"])) {
+                    $pais1 = $_POST['pais1'];
+                    $pais2 = $_POST['pais2'];
+                    $pais3 = $_POST['pais3'];
+                    $pais4 = $_POST['pais4'];
+                    $grupo = $_POST['grupo'];
 
+                    //particiones
+                    $lista1 = repartir($pais1);
+                    $lista2 = repartir($pais2);
+                    $lista3 = repartir($pais3);
+                    $lista4 = repartir($pais4);
+
+                    $trabajoono = true;
+                }
+
+                if ($trabajoono) {
+                    $makeorno1 = false;
+                    $makeorno2 = false;
+                    $makeorno3 = false;
+                    $makeorno4 = false;
+
+                    $query = "SELECT * FROM participantes WHERE nombre_participante='$lista1[0]'";
+                    $makeorno1 = verificar_existencia($query, $link);
+                    $query = "SELECT * FROM participantes WHERE nombre_participante='$lista2[0]'";
+                    $makeorno2 = verificar_existencia($query, $link);
+                    $query = "SELECT * FROM participantes WHERE nombre_participante='$lista3[0]'";
+                    $makeorno3 = verificar_existencia($query, $link);
+                    $query = "SELECT * FROM participantes WHERE nombre_participante='$lista4[0]'";
+                    $makeorno4 = verificar_existencia($query, $link);
+                    $id_que_toca = "SELECT count(*) AS ids FROM PARTICIPANTES;";
+                    $id = val_id($id_que_toca, $link);
+
+                    $verificar_grupo_lleno = "SELECT count(*) AS grupos
+                    FROM participantes P, grupo G
+                    WHERE P.cod_grupo=$grupo and G.cod_grupo=$grupo;";
+                    $hacer = verificar_espacios($verificar_grupo_lleno, $link);
+                    if ($makeorno1 && $makeorno2 && $makeorno3 && $makeorno4 && $hacer) {
+
+                        $id++;
+                        $query2 = "INSERT INTO participantes VALUES ($id,'$lista1[0]',1,$lista1[2],$grupo,'$lista1[1]')";
+                        $result2 = pg_query($link, $query2);
+                        $id++;
+                        $query3 = "INSERT INTO participantes VALUES ($id,'$lista2[0]',2,$lista2[2],$grupo,'$lista2[1]')";
+                        $result3 = pg_query($link, $query3);
+                        $id++;
+                        $query4 = "INSERT INTO participantes VALUES ($id,'$lista3[0]',3,$lista3[2],$grupo,'$lista3[1]')";
+                        $result4 = pg_query($link, $query4);
+                        $id++;
+                        $query5 = "INSERT INTO participantes VALUES ($id,'$lista4[0]',4,$lista4[2],$grupo,'$lista4[1]')";
+                        $result5 = pg_query($link, $query5);
+                        if (!$result2 && !$result3 && !$result4 && !$result5) {
+                            echo pg_last_error($dbconn);
+                        } else {
+                            echo '<div class="alert alert-success" role="alert">
+                                    Datos Insertado Correctamente!
+                                    </div>';
+                        }
+                    }
+                }
+            }
+            //separando valores de variables
+            function verificar_existencia($querys, $links)
+            {
+                $makeornos = false;
+                $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+                $verify_exist = pg_num_rows($result);
+
+                if ($verify_exist > 0) {
+                    $makeornos = false;
+                    echo '<div class="alert alert-warning" role="alert">Este equipo ya esta participando!</div>';
+                } else {
+                    $makeornos = true;
+                }
+                return $makeornos;
+            }
+
+            function verificar_espacios($querys, $links)
+            {
+                $makeornos = false;
+                $id = 0;
+                $resultss = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+
+                while ($line = pg_fetch_array($resultss)) {
+                    $id = $line['grupos'];
+                }
+                if ($id == 0) {
+                    $makeornos = true;
+                } else {
+                    echo '<div class="alert alert-warning" role="alert">Este grupo ya esta lleno!</div>';
+                }
+
+                return $makeornos;
+            }
+
+            function val_id($querys, $links)
+            {
+                $id = 0;
+                $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+
+                while ($line = pg_fetch_array($result)) {
+                    $id = $line['ids'];
+                }
+                return $id;
+            }
+            function repartir($pais)
+            {
+                $lista = explode("-", $pais);
+                return $lista;
+            }
+
+            ?>
         </div>
     </main>
     <!--Main layout-->
