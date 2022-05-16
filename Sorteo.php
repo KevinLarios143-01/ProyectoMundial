@@ -180,10 +180,11 @@ $nombresa = $_SESSION['nombre_usuario'];
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
-                        <form action="PortalAdmin.php" method="POST">
+                        <form action="Sorteo.php" method="POST">
+
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Bombo 1</label>
-                                <select class="form-select" id="pais1" name="pais1" aria-label="Default select example">
+                                <select class="form-select" id="pais1" name="pais1" multiple aria-label="multiple select example">
                                     <option selected>Selecci&oacute;n</option>
                                     <option value="Qatar-./img/QAT.webp-4">Qatar</option>
                                     <option value="Inglaterra-./img/ENG.webp-1">Inglaterra</option>
@@ -197,7 +198,7 @@ $nombresa = $_SESSION['nombre_usuario'];
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Bombo 2</label>
-                                <select class="form-select" id="pais2" name="pais2" aria-label="Default select example">
+                                <select class="form-select" id="pais2" name="pais2" multiple aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
                                     <option value="Ecuador-./img/ECU.avif-2">Ecuador</option>
                                     <option value="Ir&aacute;n-./img/IRN.webp-4">Ir&aacute;n</option>
@@ -211,7 +212,7 @@ $nombresa = $_SESSION['nombre_usuario'];
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Bombo 3</label>
-                                <select class="form-select" id="pais3" name="pais3" aria-label="Default select example">
+                                <select class="form-select" id="pais3" name="pais3" multiple aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
                                     <option value="Senegal-./img/SEN.avif-6">Senegal</option>
                                     <option value="USA-./img/QAT.webp-3">Estados Unidos</option>
@@ -225,7 +226,7 @@ $nombresa = $_SESSION['nombre_usuario'];
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Bombo 4</label>
-                                <select class="form-select" id="pais4" name="pais4" aria-label="Default select example">
+                                <select class="form-select" id="pais4" name="pais4" multiple aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
                                     <option value="Paises&nbsp;Bajos-./img/NED.webp-1">Paises Bajos</option>
                                     <option value="Escocia-./img/DEN.webp-1">Escocia</option>
@@ -239,7 +240,7 @@ $nombresa = $_SESSION['nombre_usuario'];
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form3Example3">Grupo</label>
-                                <select class="form-select" id="grupo" name="grupo" multiple aria-label="multiple select example">
+                                <select class="form-select" id="grupo" name="grupo" aria-label="multiple select example">
                                     <option selected>Seleccione el grupo a crear</option>
                                     <option value="1">A</option>
                                     <option value="2">B</option>
@@ -315,16 +316,16 @@ $nombresa = $_SESSION['nombre_usuario'];
                     if ($makeorno1 && $makeorno2 && $makeorno3 && $makeorno4 && $hacer) {
 
                         $id++;
-                        $query2 = "INSERT INTO participantes VALUES ($id,'$lista1[0]',1,$lista1[2],$grupo,'$lista1[1]')";
+                        $query2 = "INSERT INTO participantes VALUES ($id,'$lista1[0]',1,'$lista1[1]',$lista1[2],$grupo)";
                         $result2 = pg_query($link, $query2);
                         $id++;
-                        $query3 = "INSERT INTO participantes VALUES ($id,'$lista2[0]',2,$lista2[2],$grupo,'$lista2[1]')";
+                        $query3 = "INSERT INTO participantes VALUES ($id,'$lista2[0]',2,'$lista2[1]',$lista2[2],$grupo)";
                         $result3 = pg_query($link, $query3);
                         $id++;
-                        $query4 = "INSERT INTO participantes VALUES ($id,'$lista3[0]',3,$lista3[2],$grupo,'$lista3[1]')";
+                        $query4 = "INSERT INTO participantes VALUES ($id,'$lista3[0]',3,'$lista3[1]',$lista3[2],$grupo)";
                         $result4 = pg_query($link, $query4);
                         $id++;
-                        $query5 = "INSERT INTO participantes VALUES ($id,'$lista4[0]',4,$lista4[2],$grupo,'$lista4[1]')";
+                        $query5 = "INSERT INTO participantes VALUES ($id,'$lista4[0]',4,'$lista4[1]',$lista4[2],$grupo)";
                         $result5 = pg_query($link, $query5);
                         if (!$result2 && !$result3 && !$result4 && !$result5) {
                             echo pg_last_error($dbconn);
@@ -394,11 +395,8 @@ $nombresa = $_SESSION['nombre_usuario'];
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.youtube.com/fifa" rel="nofollow" target="_blank">
-                Calendario de Partidos
-            </a>
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.facebook.com/fifaworldcup/" target="_blank">
-                Grupos
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./PortalAdmin.php#content">
+                Panel de Control
             </a>
         </div>
 

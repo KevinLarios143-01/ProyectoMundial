@@ -15,7 +15,7 @@ INSERT INTO Federacion VALUES (2,'CONMEBOL');
 INSERT INTO Federacion VALUES (3,'CONCACAF');
 INSERT INTO Federacion VALUES (4,'AFC');
 INSERT INTO Federacion VALUES (5,'OFC');
-INSERT INTO Federacion VALUES ('CAF');
+INSERT INTO Federacion VALUES (6,'CAF');
 
 
 CREATE TABLE Grupo(
@@ -33,11 +33,12 @@ INSERT INTO Grupo VALUES (6,'F');
 INSERT INTO Grupo VALUES (7,'G');
 INSERT INTO Grupo VALUES (8,'H');
 
+
 CREATE TABLE Participantes(
 	cod_participante SERIAL,
 	nombre_participante varchar(30),
 	Bombo int,
-	skin bytea,
+	skin text,
 	cod_federacion int,
 	cod_grupo int,
 	PRIMARY KEY (cod_participante),
@@ -45,18 +46,25 @@ CREATE TABLE Participantes(
 	FOREIGN KEY (cod_grupo) REFERENCES Grupo(cod_grupo)
 );
 
+CREATE TABLE Lugar(
+	cod_lugar serial,
+	nombre_estadio varchar(45),
+	PRIMARY KEY (cod_lugar)
+);
+
 CREATE TABLE Partidos(
 	num_partido SERIAL,
-	lugar varchar(50),
+	cod_lugar int,
 	hora time,
 	fecha date,
-	cod_participante1 int,
-	cod_participante2 int,
+	cod_participante1 int unique,
+	cod_participante2 int unique,
 	marcador1 int,
 	marcador2 int,
 	PRIMARY KEY (num_partido),
 	FOREIGN KEY (cod_participante1) REFERENCES Participantes(cod_participante),
-	FOREIGN KEY (cod_participante2) REFERENCES Participantes(cod_participante)
+	FOREIGN KEY (cod_participante2) REFERENCES Participantes(cod_participante),
+	FOREIGN KEY (cod_lugar) REFERENCES Lugar(cod_lugar)
 );
 
 CREATE TABLE Usuarios(

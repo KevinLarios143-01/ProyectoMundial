@@ -165,8 +165,139 @@ require('conn.php');
         <hr class="my-5" />
         <div class="container">
             <!--Section: Content-->
-            <section>
-           
+            <section class="mb-5">
+                <h4 class="mb-5 text-center">
+                    <strong>Grupo</strong>
+                </h4>
+                <div class="row d-flex justify-content-center">
+                    <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">A</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">B</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">C</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">D</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">E</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">F</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">G</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">H</button>
+                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">Todos</button>
+                    </div>
+                </div><br><br>
+                <div class="row d-flex justify-content-center">
+
+                    <table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Grupo</th>
+                                <th>PJ</th>
+                                <th>PG</th>
+                                <th>PE</th>
+                                <th>PP</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>+/-</th>
+                                <th>PTS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="./img/QAT.webp" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">Brasil</p>
+                                            <p class="text-muted mb-0">john.doe@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1">Software engineer</p>
+                                    <p class="text-muted mb-0">IT department</p>
+                                </td>
+                                <td>
+                                    <span class="badge badge-success rounded-pill d-inline">Active</span>
+                                </td>
+                                <td>Senior</td>
+                                <td>
+                                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="./img/ECU.avif" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">Ecuador</p>
+                                            <p class="text-muted mb-0">alex.ray@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1">Consultant</p>
+                                    <p class="text-muted mb-0">Finance</p>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
+                                </td>
+                                <td>Junior</td>
+                                <td>
+                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="./img/SEN.avif" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">Senegal</p>
+                                            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1">Designer</p>
+                                    <p class="text-muted mb-0">UI/UX</p>
+                                </td>
+                                <td>
+                                    <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+                                </td>
+                                <td>Senior</td>
+                                <td>
+                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="./img/NED.webp" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">Paises Bajos</p>
+                                            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1">Designer</p>
+                                    <p class="text-muted mb-0">UI/UX</p>
+                                </td>
+                                <td>
+                                    <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+                                </td>
+                                <td>Senior</td>
+                                <td>
+                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
             <!--Section: Content-->
 
@@ -180,7 +311,7 @@ require('conn.php');
             <a role="button" class="btn btn-primary btn-lg m-2" href="./Partidos.php#content" rel="nofollow">
                 Partidos
             </a>
-            <a role="button" class="btn btn-primary btn-lg m-2" href="./Resultados.php#content" >
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./Resultados.php#content">
                 Resultados
             </a>
         </div>

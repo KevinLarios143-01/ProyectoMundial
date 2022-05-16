@@ -200,7 +200,7 @@ $nombresa = $_SESSION['nombre_usuario'];
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
-            <a role="button" class="btn btn-primary btn-lg m-2" href="./index.php" rel="nofollow">
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./salir.php" rel="nofollow">
                 Ir a Inicio
             </a>
         </div>

@@ -158,9 +158,6 @@ require('conn.php');
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
     <a name="regis"></a>
     <hr class="my-5" />
     <main class="mt-5">
@@ -211,7 +208,7 @@ require('conn.php');
                             </div>
                             <!-- Password administrador -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="codadmin" name="codadmin" class="form-control" />
+                                <input type="password" id="codadmin" name="codadmin" class="form-control" />
                                 <label class="form-label" for="form3Example4">C&otilde;digo Administrador</label>
                             </div>
 
