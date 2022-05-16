@@ -328,8 +328,6 @@
                         //$hacer = verificar_espacios($verificar_grupo_lleno, $link);
                         $hacer=true;
                         if ($makeorno1 && $hacer) {
-                            //$id++;
-                            echo "\n $lugar $hora $fecha $fase $grupo";
                             $insert = "INSERT INTO partidos VALUES (DEFAULT,$lugar,'$hora','$fecha',$pais1,$pais2,0,0,'$fase')";
                             $resultado = pg_query($link, $insert);
                             if (!$resultado) {

@@ -66,15 +66,15 @@ CREATE TABLE Partidos(
 	hora time,
 	fecha date,
 	fase char,
-	cod_participante1 int unique,
-	cod_participante2 int unique,
+	cod_participante1 int,
+	cod_participante2 int,
 	marcador1 int,
 	marcador2 int,
 	PRIMARY KEY (num_partido),
 	FOREIGN KEY (cod_participante1) REFERENCES Participantes(cod_participante),
 	FOREIGN KEY (cod_participante2) REFERENCES Participantes(cod_participante),
 	FOREIGN KEY (cod_lugar) REFERENCES Lugar(cod_lugar),
-	CHECK(fase in ('G','E'))
+	CHECK(fase in ('G','E') and cod_participante1<>cod_participante2)
 );
 
 CREATE TABLE Usuarios(
