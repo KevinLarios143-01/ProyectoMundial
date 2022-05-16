@@ -52,13 +52,13 @@ CREATE TABLE Lugar(
 	PRIMARY KEY (cod_lugar)
 );
 
-INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'LUSAIL');
-INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'AL JANOUB');
-INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, '974');
-INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'AL THUMAMA');
-INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'INTERNACIONAL KHALIFA');
-INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, '0CIUDAD DE LA EDUCACION');
-INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (DEFAULT, 'AHMED BIN ALI');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (1, 'LUSAIL');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (2, 'AL JANOUB');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (3, '974');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (4, 'AL THUMAMA');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (5, 'INTERNACIONAL KHALIFA');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (6, 'CIUDAD DE LA EDUCACION');
+INSERT INTO public.lugar(cod_lugar, nombre_estadio) VALUES (7, 'AHMED BIN ALI');
 
 CREATE TABLE Partidos(
 	num_partido SERIAL,

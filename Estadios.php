@@ -204,10 +204,13 @@ $nombresa = $_SESSION['nombre_usuario'];
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
+                        <h4 class="mb-5 text-center">
+                            <strong>Crear Estadio</strong>
+                        </h4>
                         <form action="Estadios.php" method="POST">
                             <!-- Name input -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="nombre_e" class="form-control" />
+                                <input type="text" id="nombre_e" name="nombre_e" class="form-control" />
                                 <label class="form-label" for="nombre_e">Nombre</label>
                             </div>
                             <!-- Checkbox -->
@@ -229,7 +232,7 @@ $nombresa = $_SESSION['nombre_usuario'];
             <?php
                 if (isset($_POST['agregar'])) {
                     $nombre_e = "";
-                    
+                    $id=0;
                     $trabajoono = false;
                     if (isset($_POST["nombre_e"])) {
                         $nombre_e=$_POST["nombre_e"];
@@ -238,7 +241,18 @@ $nombresa = $_SESSION['nombre_usuario'];
                     }
 
                     if($trabajoono){
-                        
+                        $id_que_toca = "SELECT count(*) AS ids FROM lugar;";
+                        $id = val_id($id_que_toca, $link);
+                        $id++;
+                        $query="INSERT INTO lugar VALUES ($id,'$nombre_e');";
+                        $result = pg_query($link, $query) or die('Query failed: ' . pg_last_error($link));
+                        if (!$result) {
+                            echo pg_last_error($dbconn);
+                        } else {
+                            echo '<div class="alert alert-success" role="alert">
+                                    Datos Insertado Correctamente!
+                                    </div>';
+                        }
                     }    
                 
                 }

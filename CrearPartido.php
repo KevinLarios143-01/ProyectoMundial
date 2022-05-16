@@ -1,5 +1,5 @@
 <?php
-include('conn.php');
+require('conn.php');
 session_start();
 $nombresa = $_SESSION['nombre_usuario'];
 ?>
@@ -180,6 +180,7 @@ $nombresa = $_SESSION['nombre_usuario'];
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
                         <a name="ingresar"></a>
+
                         <form action="CrearPartido.php" method="POST">
 
                             <div class="form-outline mb-4">
@@ -197,59 +198,20 @@ $nombresa = $_SESSION['nombre_usuario'];
                                 </select>
                             </div>
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bombo 2</label>
-                                <select class="form-select" id="pais2" name="pais2" multiple aria-label="Default select example">
-                                    <option selected>Selecci&oacute;n</option>
-                                    <option value="Ecuador-./img/ECU.avif-2">Ecuador</option>
-                                    <option value="Ir&aacute;n-./img/IRN.webp-4">Ir&aacute;n</option>
-                                    <option value="Arabia Saud&iacute;-./img/KSA.webp-4">Arabia Saud&iacute;</option>
-                                    <option value="Costa&nbsp;Rica-./img/QAT.webp-4">Costa Rica</option>
-                                    <option value="Australia-./img/QAT.webp-4">Australia</option>
-                                    <option value="Canad&aacute;-./img/CAN.webp-3">Canad&aacute;</option>
-                                    <option value="Serbia-./img/SRB.avif-1">Serbia</option>
-                                    <option value="Ghana-./img/QAT.webp-6">Ghana</option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bombo 3</label>
-                                <select class="form-select" id="pais3" name="pais3" multiple aria-label="Default select example">
-                                    <option selected>Selecci&oacute;n</option>
-                                    <option value="Senegal-./img/SEN.avif-6">Senegal</option>
-                                    <option value="USA-./img/QAT.webp-3">Estados Unidos</option>
-                                    <option value="M&eacute;xico-./img/MEX.avif-3">M&eacute;xico</option>
-                                    <option value="Dinamarca-./img/DEN.webp-1">Dinamarca</option>
-                                    <option value="Alemania-./img/GER.avif-1">Alemania</option>
-                                    <option value="Marruecos-./img/MAR.webp-6">Marruecos</option>
-                                    <option value="Suiza-./img/SUI.webp-1">Suiza</option>
-                                    <option value="Uruguay-./img/URU.webp-2">Uruguay</option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bombo 4</label>
-                                <select class="form-select" id="pais4" name="pais4" multiple aria-label="Default select example">
-                                    <option selected>Selecci&oacute;n</option>
-                                    <option value="Paises&nbsp;Bajos-./img/NED.webp-1">Paises Bajos</option>
-                                    <option value="Escocia-./img/DEN.webp-1">Escocia</option>
-                                    <option value="Polonia-./img/POL.webp-1">Polonia</option>
-                                    <option value="Tunez-./img/TUN.webp-6">Tunez</option>
-                                    <option value="Jap&oacute;n-./img/JPN.webp-4">Japon</option>
-                                    <option value="Croacia-./img/CRO.webp-1">Croacia</option>
-                                    <option value="Camer&uacute;n-./img/CMR.webp-6">Camer&uacute;n</option>
-                                    <option value="Corea del Sur-./img/KOR.avif-4">Corea del Sur</option>
-                                </select>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Grupo</label>
-                                <select class="form-select" id="grupo" name="grupo" aria-label="multiple select example">
-                                    <option selected>Seleccione el grupo a crear</option>
-                                    <option value="1">A</option>
-                                    <option value="2">B</option>
-                                    <option value="3">C</option>
-                                    <option value="4">D</option>
-                                    <option value="5">E</option>
-                                    <option value="6">F</option>
-                                    <option value="7">G</option>
-                                    <option value="8">H</option>
+                                <label class="form-label" for="form3Example3">Estadio</label>
+                                <select class="form-select" id="lugar" name="lugar" aria-label="multiple select example">
+                                    <option selected>Seleccione el estadio</option>
+                                    <?php 
+                                        $cod_lugar=0;
+                                        $nombre_lugar="";
+                                        $que="SELECT * FROM lugar ORDER BY cod_lugar ASC";
+                                        $res = pg_query($link, $que) or die('Query failed: ' . pg_last_error($link));
+                                        while ($line = pg_fetch_array($res)){
+                                            $cod_lugar=$line["cod_lugar"];
+                                            $nombre_lugar=$line["nombre_estadio"];
+                                            echo "<option value='$cod_lugar'>$nombre_lugar</option>";
+                                        }
+                                    ?> 
                                 </select>
                             </div>
                             <!-- Submit button -->
