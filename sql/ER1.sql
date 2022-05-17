@@ -41,6 +41,9 @@ CREATE TABLE Participantes(
 	skin text,
 	cod_federacion int,
 	cod_grupo int,
+	wins int,
+	draws int,
+	loses int,
 	PRIMARY KEY (cod_participante),
 	FOREIGN KEY (cod_federacion) REFERENCES Federacion(cod_federacion),
 	FOREIGN KEY (cod_grupo) REFERENCES Grupo(cod_grupo)

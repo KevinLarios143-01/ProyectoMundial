@@ -227,7 +227,7 @@ $horaActual = date('h:i:s');
                                             <p class="fw-bold mb-1"><?php echo $fecha; ?></p>
                                             <p class='fw-normal mb-1'><?php echo $hora. " Local Time"; ?></p>
                                             <p class='text-muted mb-0'><?php echo $nomlugar; ?></p>
-                                            <span class='badge badge-success rounded-pill d-inline'><?php echo "Match".$id; ?></span>
+                                            <span class='badge badge-success rounded-pill d-inline'><?php echo "Match ".$id; ?></span>
                                         </td>
                                         <?php
 

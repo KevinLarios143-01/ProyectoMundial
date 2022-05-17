@@ -198,6 +198,9 @@ require('conn.php');
                             <thead class='bg-light'>
                                 <tr>
                                     <th>Grupo $nombre_grupo</th>
+                                    <th>PG</th>
+                                    <th>PE</th>
+                                    <th>PP</th>
                                     <th>GF</th>
                                     <th>GC</th>
                                     <th>+/-</th>
@@ -208,15 +211,19 @@ require('conn.php');
                     ?>
 
                     <?php
-                        $query_grupo_esp = "SELECT p.nombre_participante,f.nombre_federacion, g.nombre_grupo, p.skin
+                        $query_grupo_esp = "SELECT p.nombre_participante,f.nombre_federacion,p.wins,p.draws,p.loses, g.nombre_grupo, p.skin
                                             FROM participantes p, grupo g, federacion f
                                             WHERE p.cod_grupo=$cod_grupo and p.cod_grupo=g.cod_grupo and p.cod_federacion=f.cod_federacion
-                                            GROUP BY p.nombre_participante,f.nombre_federacion,g.nombre_grupo, p.skin";
+                                            GROUP BY p.nombre_participante,f.nombre_federacion,p.wins,p.draws,p.loses,g.nombre_grupo, p.skin";
+
                         $result_grupo_esp = pg_query($link, $query_grupo_esp) or die('Query failed: ' . pg_last_error($link));
                         $makeorno = true;
                         while ($line = pg_fetch_array($result_grupo_esp)) {
                             $participante = $line['nombre_participante'];
                             $federacion= $line['nombre_federacion'];
+                            $wins= $line['wins'];
+                            $draws= $line['draws'];
+                            $loses= $line['loses'];
                             $grupo = $line['nombre_grupo'];
                             $skin = $line['skin'];
                             echo "
@@ -231,18 +238,27 @@ require('conn.php');
                                             </div>
                                         </td>
                                         <td>
-                                            <p class='fw-normal mb-1'>Software engineer</p>
-                                            <p class='text-muted mb-0'>IT department</p>
+                                            <p class='fw-normal mb-1'>$wins</p>
                                         </td>
                                         <td>
-                                            <span class='badge badge-success rounded-pill d-inline'>Active</span>
+                                            <p class='fw-normal mb-1'>$draws</p>
                                         </td>
-                                        <td>Senior</td>
                                         <td>
-                                            <button type='button' class='btn btn-link btn-sm btn-rounded'>
-                                                Edit
-                                            </button>
+                                            <p class='fw-normal mb-1'>$loses</p>
                                         </td>
+                                        <td>
+                                        <p class='fw-normal mb-1'>$loses</p>
+                                        </td>
+                                        <td>
+                                            <p class='fw-normal mb-1'>$loses</p>
+                                        </td>
+                                        <td>
+                                            <p class='fw-normal mb-1'>$loses</p>
+                                        </td>
+                                        <td>
+                                            <p class='fw-normal mb-1'>$loses</p>
+                                        </td>
+                                        
                                     </tr>";
                         }
                         echo"

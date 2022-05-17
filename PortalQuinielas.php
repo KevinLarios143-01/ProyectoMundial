@@ -1,10 +1,10 @@
 <?php
-include('conn.php');
-session_start();
-$username = $_SESSION['nombre_usuario'];
-date_default_timezone_set('America/Guatemala');
-$fechaActual = date('Y-m-d');
-$horaActual = date('h:i:s');
+    require('conn.php');
+    session_start();
+    $username = $_SESSION['nombre_usuario'];
+    date_default_timezone_set('America/Guatemala');
+    $fechaActual = date('Y-m-d');
+    $horaActual = date('h:i:s');
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,10 +21,10 @@ $horaActual = date('h:i:s');
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-    <!-- JQUERY -->
+    <title>FIFA</title>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/quinela.js"></script>
-    <title>FIFA</title>
 </head>
 
 <body>
@@ -51,10 +51,10 @@ $horaActual = date('h:i:s');
                             <a class="nav-link" aria-current="page" href="Grupos.php">Grupos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
+                            <a class="nav-link" href="Partidos.php" rel="nofollow" >Partidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Resultados.php">Resultados</a>
+                            <a class="nav-link" href="Resultados.php" >Resultados</a>
                         </li>
                     </ul>
 
@@ -166,9 +166,9 @@ $horaActual = date('h:i:s');
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-
-
-    <!--Main layout-->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
     <a name="ingreso"></a>
     <main class="mt-5">
         <!--Section: Content-->
@@ -176,111 +176,182 @@ $horaActual = date('h:i:s');
         <div class="container">
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>QUNIELAS</strong><br />
-                    <strong>Bienvenido <?php echo $username ?></strong>
+                    <strong>QUNIELAS</strong><br/>
+                    <strong>Bienvenido <?php echo $username?></strong>
                 </h4>
 
                 <div class="row d-flex justify-content-center">
                     <div class="text-align:center;">
+                        
+                         <!--Tomar los datos de la tabla de partidos-->
 
-                        <!--Tomar los datos de la tabla de partidos-->
                         <table class="table table-hover">
 
                             <tr>
-                                <td>No.Partido</td>
-                                <td>Estadio</td>
-                                <td>Hora</td>
-                                <td>Fecha</td>
-                                <td>Equipo1</td>
-                                <td>Equipo2</td>
-                                <td>Marcador1</td>
-                                <td>Marcador2</td>
+                                <td>No.Partido</td> 
+                                <td>Estadio</td>   
+                                <td>Hora</td> 
+                                <td>Fecha</td> 
+                                <td>Equipo1</td> 
+                                <td>Equipo2</td> 
+                                <td>Marcador1</td> 
+                                <td>Marcador2</td> 
                                 <td>Marcador(Eq1)</td>
                                 <td>Marcador(Eq2)</td>
-                                <td><?php echo $fechaActual ?></td>
+                                
                             </tr>
                             <?php
-                            $sql = "SELECT * FROM partidos ORDER BY num_partido ASC;";
-                            $result = pg_query($link, $sql) or die('Query failed: ' . pg_last_error($link));
 
-                            while ($line = pg_fetch_array($result)) {
-                                $id = $line['num_partido'];
-                                $codlugar = $line['cod_lugar'];
-                                $sql3 = "SELECT * FROM lugar;";
-                                $result3 = pg_query($link, $sql3) or die('Query failed: ' . pg_last_error($link));
-                                while ($line3 = pg_fetch_array($result3)) {
-                                    if ($codlugar == $line3['cod_lugar']) {
-                                        $nomlugar = $line3['nombre_estadio'];
+                                $link = pg_connect("$host $port $dbname $user $password")or die('Could not connect: '. " error de conexion");
+                                $sql = "select * from partidos order by num_partido asc;";
+                                $result = pg_query($link,$sql) or die('Query failed: ' . pg_last_error($link));
+                                while ($line = pg_fetch_array($result)){
+                                    $id = $line['num_partido'];
+                                    $codlugar = $line['cod_lugar'];
+
+                                    $sql3 = "select * from lugar;";
+                                    $result3 = pg_query($link,$sql3) or die('Query failed: ' . pg_last_error($link));
+                                    while ($line3 = pg_fetch_array($result3)){
+
+                                        if($codlugar == $line3['cod_lugar']){
+
+                                            $nomlugar = $line3['nombre_estadio'];
+                                        }
+
                                     }
-                                }
+                                    
 
-                                $hora = $line['hora'];
-                                $fecha = $line['fecha'];
-                                $equipo1 = $line['cod_participante1'];
-                                $equipo2 = $line['cod_participante2'];
-                                $marc1 = $line['marcador1'];
-                                $marc2 = $line['marcador2'];
-                                $fechaAcomprar = $fecha;
+
+                                    $hora = $line['hora'];
+                                    $fecha = $line['fecha'];
+                                    $equipo1 = $line['cod_participante1'];
+                                    $equipo2 = $line['cod_participante2'];
+                                    $marc1 = $line['marcador1'];
+                                    $marc2 = $line['marcador2'];
+
+                                    $fechaAcomprar = $fecha;
                             ?>
-                                <tr>
+                                    <tr>
                                     <td><?php echo $id; ?></td>
                                     <td><?php echo $nomlugar; ?></td>
                                     <td><?php echo $hora; ?></td>
                                     <td><?php echo $fecha; ?></td>
-                                    <?php
-                                    $sql2 = "SELECT * FROM participantes";
-                                    $result2 = pg_query($link, $sql2) or die('Query failed: ' . pg_last_error($link));
-                                    while ($line2 = pg_fetch_array($result2)) {
 
-                                        if ($equipo1 == $line2['cod_participante']) {
+                                    <?php
+
+                                    $sql2 = "select * from participantes";
+                                    $result2 = pg_query($link,$sql2) or die('Query failed: ' . pg_last_error($link));
+                                    while ($line2 = pg_fetch_array($result2)){
+
+                                        if($equipo1 == $line2['cod_participante']){
+
                                             $nom1 = $line2['nombre_participante'];
-                                        } elseif ($equipo2 == $line2['cod_participante']) {
+                                            $band1 = $line2['skin'];
+
+                                        }elseif($equipo2 == $line2['cod_participante']){
+
                                             $nom2 = $line2['nombre_participante'];
+                                            $band2 = $line2['skin'];
+
                                         }
                                     }
                                     ?>
-                                    <td><?php echo $nom1; ?></td>
-                                    <td><?php echo $nom2; ?></td>
+                                    <td><?php echo $nom1; ?><img src="<?php echo $band1?>" id="imagen"></td>
+                                    <td><?php echo $nom2; ?><img src="<?php echo $band2?>" id="imagen"></td>
+                                    
 
                                     <?php
-                                    if ($fechaActual > $fechaAcomprar) {
-                                        if ($marc1 == 0 and $marc2 == 0) {
+                                        if($fechaActual > $fechaAcomprar){
+                                            if($marc1 == 0 and $marc2 == 0){
 
-                                            $numero_aleatorio1 = mt_rand(0, 10);
-                                            $numero_aleatorio2 = mt_rand(0, 10);
-                                            $marc1 = $numero_aleatorio1;
-                                            $marc2 = $numero_aleatorio2;
-                                            $acl = "UPDATE partidos SET marcador1=$numero_aleatorio1, marcador2 =$numero_aleatorio2 WHERE num_partido=$id;";
-                                            $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
+                                                $numero_aleatorio1 = mt_rand(0,10);
+                                                $numero_aleatorio2 = mt_rand(0,10);
+                                                $marc1 = $numero_aleatorio1;
+                                                $marc2 = $numero_aleatorio2;
+                                                $acl = "UPDATE partidos SET marcador1=$numero_aleatorio1, marcador2 =$numero_aleatorio2 WHERE num_partido=$id;";
+                                                $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
+                                            }
+                                            ?>
+                                                <td><?php echo $marc1; ?></td>
+                                                <td><?php echo $marc2; ?></td>
+                                                <td><input type="integer" id="<?php echo "CA".$id; ?>" name="m1" disabled></td>
+                                                <td><input type="integer" id="<?php echo "CB".$id?>" name="m2" disabled></td>
+                                                <td><button type="submit" name="register" id="<?php echo $id;?>" onclick="getValor(this);" class="btn btn-primary btn-block mb-4 registro" disabled>
+                                                     Finalizado
+                                                </button></td>
+                                            <?php
+
+                                            //Aquí se le sumaran los puntos correspondientes al usuario.
+                                            $quiniPuntos = "select * from quinielas where usuario='$username' and num_partido=$id";
+                                            $valores = pg_query($link,$quiniPuntos) or die('Query failed: ' . pg_last_error($link));
+                                            $pro1=0;
+                                            $pro2=0;
+                                             while ($vr = pg_fetch_array($valores)){
+
+                                                $principal = $vr['usuario'];
+                                                $pro1 = $vr['m_1'];
+                                                $pro2 = $vr['m_2'];
+
+                                             }
+
+                                             $puntos =0;
+
+                                             if(($pro1==$marc1) and (($pro2==$marc2))){
+                                                
+                                                $puntos = 6;
+
+                                             }else{
+                                                    if($pro1 > $pro2){
+                                                        $p1 = 1;
+                                                    }else{ $p1 = 2;}
+
+                                                    if($p1 == 1){
+                                                        if($marc1 > $marc2){
+                                                            $puntos = 3;
+                                                        }
+                                                    }elseif($p1 == 2){
+                                                        if($marc2 > $marc1){
+                                                            $puntos = 3;
+                                                        }
+
+                                                    }
+                                               }
+                                                $totalP = "UPDATE usuarios SET acumulado=$puntos WHERE usuario='$username';";
+                                                $resultPun = pg_query($link, $totalP) or die('Query failed: ' . pg_last_error($link));
+
+
+
+                                            
+                                        }else{
+
+                                            ?>
+                                                <td><?php echo $marc1; ?></td>
+                                                <td><?php echo $marc2; ?></td>
+                                                <td><input type="integer" id="<?php echo "CA".$id; ?>" name="m1"></td>
+                                                <td><input type="integer" id="<?php echo "CB".$id?>" name="m2"></td>
+                                                <td><button type="submit" name="register" id="<?php echo $id;?>" onclick="getValor(this);" class="btn btn-primary btn-block mb-4 registro">
+                                                     Registrar
+                                                </button></td>
+                                            <?php
                                         }
+
+
                                     ?>
-                                        <td><?php echo $marc1; ?></td>
-                                        <td><?php echo $marc2; ?></td>
-                                        <td><input type="integer" id="<?php echo "CA" . $id; ?>" name="m1" disabled></td>
-                                        <td><input type="integer" id="<?php echo "CB" . $id ?>" name="m2" disabled></td>
-                                        <td><button type="submit" name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class="btn btn-primary btn-block mb-4 registro" disabled>
-                                                Finalizado
-                                            </button></td>
+
+                                    </tr>
                                     <?php
-                                    } else {
+                                    
+                                }
+                        
                                     ?>
-                                        <td><?php echo $marc1; ?></td>
-                                        <td><?php echo $marc2; ?></td>
-                                        <td><input type="integer" id="<?php echo "CA" . $id; ?>" name="m1"></td>
-                                        <td><input type="integer" id="<?php echo "CB" . $id ?>" name="m2"></td>
-                                        <td><button type="submit" name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class="btn btn-primary btn-block mb-4 registro">
-                                                Registrar
-                                            </button></td>
-                                    <?php
-                                    }
-                                    ?>
-                                </tr>
-                            <?php
-                            }
-                            ?>
-                            <tr></tr>
+
+                                    <tr></tr>
+                            
                         </table>
+                        
+                    
                     </div>
+
                 </div>
             </section>
             <!--Section: Content-->
