@@ -18,9 +18,10 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-    <!-- JQUERY -->
+    <!-- JQUERY 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/quinela.js"></script>
+    <title>FIFA</title>-->
     <title>FIFA</title>
 </head>
 
@@ -400,6 +401,9 @@
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./CrearPartido.php#content">
+                Crear Partido
+            </a>
             <a role="button" class="btn btn-primary btn-lg m-2" href="./PortalAdmin.php#content">
                 Panel de Control
             </a>
