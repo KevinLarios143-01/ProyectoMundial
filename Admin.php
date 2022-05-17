@@ -1,5 +1,5 @@
 <?php
-    include('conn.php');
+include('conn.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,6 +16,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+    <!-- JQUERY -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/quinela.js"></script>
     <title>FIFA</title>
 </head>
 
@@ -43,10 +46,10 @@
                             <a class="nav-link" aria-current="page" href="Grupos.php">Grupos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Partidos.php" rel="nofollow" >Partidos</a>
+                            <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Resultados.php" >Resultados</a>
+                            <a class="nav-link" href="Resultados.php">Resultados</a>
                         </li>
                     </ul>
 
@@ -218,7 +221,7 @@
                 </div>
             </section>
             <!--Section: Content-->
-            
+
         </div>
     </main>
     <!--Main layout-->
@@ -266,4 +269,3 @@
 </body>
 
 </html>
-

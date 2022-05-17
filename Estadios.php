@@ -18,7 +18,9 @@ $nombresa = $_SESSION['nombre_usuario'];
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-
+    <!-- JQUERY -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/quinela.js"></script>
     <title>FIFA</title>
 </head>
 
@@ -184,18 +186,18 @@ $nombresa = $_SESSION['nombre_usuario'];
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                            $query_estadios = "SELECT * FROM lugar";
-                            $result_estadios = pg_query($link,$query_estadios) or die('Query failed: ' . pg_last_error($link));
-                            $makeorno=true;
-                            while ($line = pg_fetch_array($result_estadios)) {
-                                $cod = $line['cod_lugar'];
-                                $nombre=$line['nombre_estadio'];
-                                echo "<tr>
+                        <?php
+                        $query_estadios = "SELECT * FROM lugar";
+                        $result_estadios = pg_query($link, $query_estadios) or die('Query failed: ' . pg_last_error($link));
+                        $makeorno = true;
+                        while ($line = pg_fetch_array($result_estadios)) {
+                            $cod = $line['cod_lugar'];
+                            $nombre = $line['nombre_estadio'];
+                            echo "<tr>
                                         <th scope='row'>$cod</th>
                                         <td>$nombre</td>
                                     </tr>";
-                            }
+                        }
                         ?>
                     </tbody>
 
@@ -230,59 +232,58 @@ $nombresa = $_SESSION['nombre_usuario'];
             </section>
             <!--Section: Content-->
             <?php
-                if (isset($_POST['agregar'])) {
-                    $nombre_e = "";
-                    $id=0;
-                    $trabajoono = false;
-                    if (isset($_POST["nombre_e"])) {
-                        $nombre_e=$_POST["nombre_e"];
-                        //particiones
-                        $trabajoono = true;
-                    }
+            if (isset($_POST['agregar'])) {
+                $nombre_e = "";
+                $id = 0;
+                $trabajoono = false;
+                if (isset($_POST["nombre_e"])) {
+                    $nombre_e = $_POST["nombre_e"];
+                    //particiones
+                    $trabajoono = true;
+                }
 
-                    if($trabajoono){
-                        $id_que_toca = "SELECT count(*) AS ids FROM lugar;";
-                        $id = val_id($id_que_toca, $link);
-                        $id++;
-                        $query="INSERT INTO lugar VALUES ($id,'$nombre_e');";
-                        $result = pg_query($link, $query) or die('Query failed: ' . pg_last_error($link));
-                        if (!$result) {
-                            echo pg_last_error($dbconn);
-                        } else {
-                            echo '<div class="alert alert-success" role="alert">
+                if ($trabajoono) {
+                    $id_que_toca = "SELECT count(*) AS ids FROM lugar;";
+                    $id = val_id($id_que_toca, $link);
+                    $id++;
+                    $query = "INSERT INTO lugar VALUES ($id,'$nombre_e');";
+                    $result = pg_query($link, $query) or die('Query failed: ' . pg_last_error($link));
+                    if (!$result) {
+                        echo pg_last_error($dbconn);
+                    } else {
+                        echo '<div class="alert alert-success" role="alert">
                                     Datos Insertado Correctamente!
                                     </div>';
-                        }
-                    }    
-                
+                    }
                 }
-                
-                //separando valores de variables
-                function verificar_existencia($querys, $links)
-                {
+            }
+
+            //separando valores de variables
+            function verificar_existencia($querys, $links)
+            {
+                $makeornos = false;
+                $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+                $verify_exist = pg_num_rows($result);
+
+                if ($verify_exist > 0) {
                     $makeornos = false;
-                    $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
-                    $verify_exist = pg_num_rows($result);
-
-                    if ($verify_exist > 0) {
-                        $makeornos = false;
-                        echo '<div class="alert alert-warning" role="alert">Este equipo ya esta participando!</div>';
-                    } else {
-                        $makeornos = true;
-                    }
-                    return $makeornos;
+                    echo '<div class="alert alert-warning" role="alert">Este equipo ya esta participando!</div>';
+                } else {
+                    $makeornos = true;
                 }
+                return $makeornos;
+            }
 
-                function val_id($querys, $links)
-                {
-                    $id = 0;
-                    $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+            function val_id($querys, $links)
+            {
+                $id = 0;
+                $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
 
-                    while ($line = pg_fetch_array($result)) {
-                        $id = $line['ids'];
-                    }
-                    return $id;
+                while ($line = pg_fetch_array($result)) {
+                    $id = $line['ids'];
                 }
+                return $id;
+            }
 
 
             ?>

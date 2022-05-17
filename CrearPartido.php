@@ -1,8 +1,8 @@
 <?php
-    require('conn.php');
-    session_start();
-    $nombresa = $_SESSION['nombre_usuario'];
-    $disabled1="disabled";
+require('conn.php');
+session_start();
+$nombresa = $_SESSION['nombre_usuario'];
+$disabled1 = "disabled";
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,7 +19,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-
+    <!-- JQUERY -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/quinela.js"></script>
     <title>FIFA</title>
 </head>
 
@@ -250,9 +252,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
 
-                            
+
+
                             <!-- Submit button -->
                             <button type="submit" name="enviar" class="btn btn-primary btn-block mb-4">
                                 Agregar

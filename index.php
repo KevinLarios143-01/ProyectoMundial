@@ -1,5 +1,5 @@
 <?php
-  require('conn.php');
+require('conn.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,6 +16,9 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
   <!-- MDB -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+  <!-- JQUERY -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="js/quinela.js"></script>
   <title>FIFA</title>
 </head>
 
@@ -31,7 +34,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000">
       <div class="container-fluid">
         <!-- Navbar brand -->
-        <a class="navbar-brand nav-link"  href="index.php">
+        <a class="navbar-brand nav-link" href="index.php">
           <img src="./img/logo.png" class="me-2" height="25" width="25" alt="WC Logo" loading="lazy" />
           <strong>FIFA</strong></a>
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,10 +46,10 @@
               <a class="nav-link" aria-current="page" href="Grupos.php">Grupos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Partidos.php" rel="nofollow" >Partidos</a>
+              <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Resultados.php" >Resultados</a>
+              <a class="nav-link" href="Resultados.php">Resultados</a>
             </li>
           </ul>
 
@@ -102,7 +105,7 @@
                   21 de noviembre - 17 de diciembre
                 </h5>
                 <a class="btn btn-outline-light btn-lg m-2" href="index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
-                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis"  role="button">Registrarse</a>
+                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" role="button">Registrarse</a>
               </div>
             </div>
           </div>
@@ -177,14 +180,14 @@
           <div class="col-md-6 gx-5 mb-4"><br>
             <h4><strong>Copa Mundial de Fútbol de 2022</strong></h4>
             <p class="text-muted">
-            La Copa Mundial de Fútbol de la FIFA Catar 2022 será la XXII vigésimo 
-            segunda edición de la Copa Mundial de Fútbol masculino organizada por la FIFA. 
-            Esta edición se realizará desde el 21 de noviembre al 18 de diciembre de 2022 en Catar, 
-            que consiguió los derechos de organización el 2 de diciembre de 2010.
+              La Copa Mundial de Fútbol de la FIFA Catar 2022 será la XXII vigésimo
+              segunda edición de la Copa Mundial de Fútbol masculino organizada por la FIFA.
+              Esta edición se realizará desde el 21 de noviembre al 18 de diciembre de 2022 en Catar,
+              que consiguió los derechos de organización el 2 de diciembre de 2010.
             </p>
             <p><strong>Bal&oacute;n Qatar 2022</strong></p>
             <p class="text-muted">
-              La pelota con la que se jugará el próximo Mundial 
+              La pelota con la que se jugará el próximo Mundial
               de Catar 2022 llevará por nombre Al Rihla de la marca Adidas.
             </p>
             <p><strong>Mascota Qatar 2022</strong></p>
@@ -260,16 +263,16 @@
       </section>
       <!--Section: Content-->
       <a name="ingresar"></a>
-      <hr class="my-5" />      
+      <hr class="my-5" />
       <section class="mb-5">
-        
+
         <h4 class="mb-5 text-center">
           <strong>Ingresar a Quinielas</strong>
         </h4>
 
         <div class="row d-flex justify-content-center">
           <div class="col-md-6">
-            
+
             <form action="SessionQuiniela.php" method="POST">
               <!-- Email input -->
               <div class="form-outline mb-4">
@@ -313,7 +316,7 @@
         </div>
       </section>
       <!--Section: Content-->
-     
+
     </div>
   </main>
   <!--Main layout-->
@@ -321,7 +324,7 @@
   <!--Footer-->
   <footer class="bg-light text-lg-start">
     <div class="py-4 text-center">
-      <a role="button" class="btn btn-primary btn-lg m-2" href="./Partidos.php#content" rel="nofollow" >
+      <a role="button" class="btn btn-primary btn-lg m-2" href="./Partidos.php#content" rel="nofollow">
         Calendario de Partidos
       </a>
       <a role="button" class="btn btn-primary btn-lg m-2" href="./Grupos.php#content">

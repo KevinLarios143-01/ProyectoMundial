@@ -16,6 +16,9 @@ require('conn.php');
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+    <!-- JQUERY -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/quinela.js"></script>
     <title>FIFA</title>
 </head>
 
@@ -102,7 +105,7 @@ require('conn.php');
                                     21 de noviembre - 17 de diciembre
                                 </h5>
                                 <a class="btn btn-outline-light btn-lg m-2" href="./index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
-                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis"  role="button">Registrarse</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" role="button">Registrarse</a>
                             </div>
                         </div>
                     </div>
