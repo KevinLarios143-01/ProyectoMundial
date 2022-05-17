@@ -206,11 +206,11 @@ $nombresa = $_SESSION['nombre_usuario'];
                                     <option value="Ecuador-./img/ECU.avif-2">Ecuador</option>
                                     <option value="Ir&aacute;n-./img/IRN.webp-4">Ir&aacute;n</option>
                                     <option value="Arabia Saud&iacute;-./img/KSA.webp-4">Arabia Saud&iacute;</option>
-                                    <option value="Costa&nbsp;Rica-./img/QAT.webp-4">Costa Rica</option>
-                                    <option value="Australia-./img/QAT.webp-4">Australia</option>
+                                    <option value="Costa&nbsp;Rica-./img/CRC.webp-3">Costa Rica</option>
+                                    <option value="Australia-./img/AUS.webp-4">Australia</option>
                                     <option value="Canad&aacute;-./img/CAN.webp-3">Canad&aacute;</option>
                                     <option value="Serbia-./img/SRB.avif-1">Serbia</option>
-                                    <option value="Ghana-./img/QAT.webp-6">Ghana</option>
+                                    <option value="Ghana-./img/GHA.webp-6">Ghana</option>
                                 </select>
                             </div>
                             <div class="form-outline mb-4">
@@ -218,7 +218,7 @@ $nombresa = $_SESSION['nombre_usuario'];
                                 <select class="form-select" id="pais3" name="pais3" multiple aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
                                     <option value="Senegal-./img/SEN.avif-6">Senegal</option>
-                                    <option value="USA-./img/QAT.webp-3">Estados Unidos</option>
+                                    <option value="USA-./img/USA.webp-3">Estados Unidos</option>
                                     <option value="M&eacute;xico-./img/MEX.avif-3">M&eacute;xico</option>
                                     <option value="Dinamarca-./img/DEN.webp-1">Dinamarca</option>
                                     <option value="Alemania-./img/GER.avif-1">Alemania</option>
@@ -232,11 +232,11 @@ $nombresa = $_SESSION['nombre_usuario'];
                                 <select class="form-select" id="pais4" name="pais4" multiple aria-label="Default select example">
                                     <option selected>Selecci&oacute;n</option>
                                     <option value="Paises&nbsp;Bajos-./img/NED.webp-1">Paises Bajos</option>
-                                    <option value="Escocia-./img/DEN.webp-1">Escocia</option>
+                                    <option value="Escocia-./img/SCO.webp-1">Escocia</option>
                                     <option value="Polonia-./img/POL.webp-1">Polonia</option>
                                     <option value="Tunez-./img/TUN.webp-6">Tunez</option>
                                     <option value="Jap&oacute;n-./img/JPN.webp-4">Japon</option>
-                                    <option value="Croacia-./img/CRO.webp-1">Croacia</option>
+                                    <option value="Croacia-./img/CRO.avif-1">Croacia</option>
                                     <option value="Camer&uacute;n-./img/CMR.webp-6">Camer&uacute;n</option>
                                     <option value="Corea del Sur-./img/KOR.avif-4">Corea del Sur</option>
                                 </select>

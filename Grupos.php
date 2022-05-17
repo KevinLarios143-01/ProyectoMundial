@@ -187,120 +187,72 @@ require('conn.php');
                     </div>
                 </div><br><br>
                 <div class="row d-flex justify-content-center">
+                    <?php
+                    $query_grupos = "SELECT g.cod_grupo, g.nombre_grupo FROM grupo g";
+                    $result_grupos = pg_query($link, $query_grupos) or die('Query failed: ' . pg_last_error($link));
+                    while ($line = pg_fetch_array($result_grupos)) {
+                        $cod_grupo = $line['cod_grupo'];
+                        $nombre_grupo = $line['nombre_grupo'];
+                        echo " 
+                        <table class='table align-middle mb-0 bg-white'>
+                            <thead class='bg-light'>
+                                <tr>
+                                    <th>Grupo $nombre_grupo</th>
+                                    <th>GF</th>
+                                    <th>GC</th>
+                                    <th>+/-</th>
+                                    <th>PTS</th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                    ?>
 
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Grupo</th>
-                                <th>PJ</th>
-                                <th>PG</th>
-                                <th>PE</th>
-                                <th>PP</th>
-                                <th>GF</th>
-                                <th>GC</th>
-                                <th>+/-</th>
-                                <th>PTS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img src="./img/QAT.webp" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1">Brasil</p>
-                                            <p class="text-muted mb-0">john.doe@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">Software engineer</p>
-                                    <p class="text-muted mb-0">IT department</p>
-                                </td>
-                                <td>
-                                    <span class="badge badge-success rounded-pill d-inline">Active</span>
-                                </td>
-                                <td>Senior</td>
-                                <td>
-                                    <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img src="./img/ECU.avif" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1">Ecuador</p>
-                                            <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">Consultant</p>
-                                    <p class="text-muted mb-0">Finance</p>
-                                </td>
-                                <td>
-                                    <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
-                                </td>
-                                <td>Junior</td>
-                                <td>
-                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark">
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img src="./img/SEN.avif" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1">Senegal</p>
-                                            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">Designer</p>
-                                    <p class="text-muted mb-0">UI/UX</p>
-                                </td>
-                                <td>
-                                    <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-                                </td>
-                                <td>Senior</td>
-                                <td>
-                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark">
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img src="./img/NED.webp" class="rounded-circle" alt="" style="width: 45px; height: 45px" />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1">Paises Bajos</p>
-                                            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="fw-normal mb-1">Designer</p>
-                                    <p class="text-muted mb-0">UI/UX</p>
-                                </td>
-                                <td>
-                                    <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-                                </td>
-                                <td>Senior</td>
-                                <td>
-                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark">
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <?php
+                        $query_grupo_esp = "SELECT p.nombre_participante,f.nombre_federacion, g.nombre_grupo, p.skin
+                                            FROM participantes p, grupo g, federacion f
+                                            WHERE p.cod_grupo=$cod_grupo and p.cod_grupo=g.cod_grupo and p.cod_federacion=f.cod_federacion
+                                            GROUP BY p.nombre_participante,f.nombre_federacion,g.nombre_grupo, p.skin";
+                        $result_grupo_esp = pg_query($link, $query_grupo_esp) or die('Query failed: ' . pg_last_error($link));
+                        $makeorno = true;
+                        while ($line = pg_fetch_array($result_grupo_esp)) {
+                            $participante = $line['nombre_participante'];
+                            $federacion= $line['nombre_federacion'];
+                            $grupo = $line['nombre_grupo'];
+                            $skin = $line['skin'];
+                            echo "
+                                    <tr>
+                                        <td>
+                                            <div class='d-flex align-items-center'>
+                                                <img src='$skin' alt='' style='width: 45px; height: 45px' class='rounded-circle'/>
+                                                <div class='ms-3'>
+                                                    <p class='fw-bold mb-1'>$participante</p>
+                                                    <p class='text-muted mb-0'>$federacion</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class='fw-normal mb-1'>Software engineer</p>
+                                            <p class='text-muted mb-0'>IT department</p>
+                                        </td>
+                                        <td>
+                                            <span class='badge badge-success rounded-pill d-inline'>Active</span>
+                                        </td>
+                                        <td>Senior</td>
+                                        <td>
+                                            <button type='button' class='btn btn-link btn-sm btn-rounded'>
+                                                Edit
+                                            </button>
+                                        </td>
+                                    </tr>";
+                        }
+                        echo"
+                            </tbody>
+                        </table>
+                        <hr class='my-5'/>";
+                    }    
+                    ?>
+
+
                 </div>
             </section>
             <!--Section: Content-->
