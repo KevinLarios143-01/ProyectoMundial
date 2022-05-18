@@ -313,25 +313,30 @@
                         $pais1 = $_POST["pais1"];
                         $pais2 = $_POST["pais2"];
                         $trabajoono = true;
+                    }else {
+                        echo '<div class="alert alert-warning" role="alert">
+                                Debe llenar todos los campos!
+                                </div>';
                     }
 
                     if ($trabajoono) {
                         $makeorno1 = false;
                         $makeorno2 = false;
                         
-                        $verificacion1 = "SELECT * FROM partidos WHERE cod_participante1=$pais1 and cod_participante2=$pais2;";
+                        $verificacion1 = "SELECT * FROM partidos WHERE cod_participante1=$pais1 and cod_participante2=$pais2 and fase='$fase';";
                         $makeorno1 = verificar_existencia($verificacion1, $link);
                         $verificacion2 = "SELECT * FROM partidos WHERE cod_participante1=$pais2 and cod_participante2=$pais1";
                         $makeorno2 = verificar_existencia($verificacion2, $link);
+                        
+                        $id_que_toca = "SELECT count(*) AS ids FROM partidos;";
+                        $id = val_id($id_que_toca, $link);
 
-                        /*$verificar_traslape = "SELECT count(*) AS grupos
-                                                FROM participantes P, grupo G
-                                                WHERE P.cod_grupo=$grupo and G.cod_grupo=$grupo;";*/
+                        $query_traslape = "SELECT * FROM partidos WHERE fecha='$fecha' and hora='$hora';";
+    
+                        $hacer=verificar_traslape($query_traslape,$link);
 
-                        //$hacer = verificar_espacios($verificar_grupo_lleno, $link);
-                        $hacer=true;
-                        if ($makeorno1 && $hacer) {
-                            $insert = "INSERT INTO partidos VALUES (DEFAULT,$lugar,'$hora','$fecha','$fase',$pais1,$pais2,0,0)";
+                        if ($makeorno1 && $makeorno2 && $hacer) {
+                            $insert = "INSERT INTO partidos VALUES ($id,$lugar,'$hora','$fecha','$fase',$pais1,$pais2,0,0)";
                             $resultado = pg_query($link, $insert);
                             if (!$resultado) {
                                 echo pg_last_error($dbconn);
@@ -344,55 +349,42 @@
                     }
                 }
                 //separando valores de variables
-                function verificar_existencia($querys, $links)
-                {
+                function verificar_existencia($querys, $links){
                     $makeornos = false;
                     $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
                     $verify_exist = pg_num_rows($result);
 
                     if ($verify_exist > 0) {
                         $makeornos = false;
-                        echo '<div class="alert alert-warning" role="alert">Este equipo ya esta participando!</div>';
+                        echo '<div class="alert alert-warning" role="alert">Este partido ya fue programado!</div>';
                     } else {
                         $makeornos = true;
                     }
                     return $makeornos;
                 }
-
-                function verificar_espacios($querys, $links)
-                {
+                function verificar_traslape($querys, $links){
                     $makeornos = false;
-                    $id = 0;
-                    $resultss = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+                    $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
+                    $verify_exist = pg_num_rows($result);
 
-                    while ($line = pg_fetch_array($resultss)) {
-                        $id = $line['grupos'];
-                    }
-                    if ($id == 0) {
-                        $makeornos = true;
+                    if ($verify_exist >=2 ) {
+                        $makeornos = false;
+                        echo '<div class="alert alert-warning" role="alert">No se pueden programar mas partidos en este horario!</div>';
                     } else {
-                        echo '<div class="alert alert-warning" role="alert">Este grupo ya esta lleno!</div>';
+                        $makeornos = true;
                     }
-
                     return $makeornos;
                 }
-
-                function val_id($querys, $links)
-                {
+                function val_id($querys, $links){
                     $id = 0;
                     $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
 
                     while ($line = pg_fetch_array($result)) {
                         $id = $line['ids'];
                     }
+                    $id++;
                     return $id;
                 }
-                function repartir($pais)
-                {
-                    $lista = explode("-", $pais);
-                    return $lista;
-                }
-
             ?>
         </div>
     </main>
