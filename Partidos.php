@@ -191,34 +191,25 @@ $horaActual = date('h:i:s');
                             </thead>
                             <tbody>
                                 <?php
-
-                                $link = pg_connect("$host $port $dbname $user $password") or die('Could not connect: ' . " error de conexion");
-                                $sql = "select * from partidos order by num_partido asc;";
+                                $sql = "SELECT * from partidos ORDER BY num_partido ASC;";
                                 $result = pg_query($link, $sql) or die('Query failed: ' . pg_last_error($link));
                                 while ($line = pg_fetch_array($result)) {
                                     $id = $line['num_partido'];
                                     $codlugar = $line['cod_lugar'];
 
-                                    $sql3 = "select * from lugar;";
-                                    $result3 = pg_query($link, $sql3) or die('Query failed: ' . pg_last_error($link));
-                                    while ($line3 = pg_fetch_array($result3)) {
-
-                                        if ($codlugar == $line3['cod_lugar']) {
-
-                                            $nomlugar = $line3['nombre_estadio'];
-                                        }
+                                    $query_lugar = "SELECT * FROM lugar WHERE cod_lugar=$codlugar;";
+                                    $result_lugar = pg_query($link, $query_lugar) or die('Query failed: ' . pg_last_error($link));
+                                    while ($line3 = pg_fetch_array($result_lugar)) {
+                                        $line3['cod_lugar'];
+                                        $nomlugar = $line3['nombre_estadio'];
                                     }
-
-
-
                                     $hora = $line['hora'];
                                     $fecha = $line['fecha'];
                                     $equipo1 = $line['cod_participante1'];
                                     $equipo2 = $line['cod_participante2'];
                                     $marc1 = $line['marcador1'];
                                     $marc2 = $line['marcador2'];
-
-                                    $fechaAcomprar = $fecha;
+                                    $fechaAcomparar = $fecha;
                                 ?>
                                     <tr>
                                         <td>
@@ -271,22 +262,22 @@ $horaActual = date('h:i:s');
 
 
                                         <?php
-                                        if ($fechaActual > $fechaAcomprar) {
+                                        if ($fechaActual > $fechaAcomparar) {
 
                                         ?>
                                             <td>
-                                                <button type='button' class='btn btn-link btn-sm btn-rounded'>
+                                                <button type='button' class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark">
                                                     Finalizado
                                                 </button>
                                             </td>
                                         <?php
 
 
-                                        } elseif ($fechaActual == $fechaAcomprar) {
+                                        } elseif ($fechaActual == $fechaAcomparar) {
 
                                         ?>
                                             <td>
-                                                <button type='button' class='btn btn-link btn-sm btn-rounded'>
+                                                <button type='button' class="btn btn-outline-success btn-rounded" data-mdb-ripple-color="dark">
                                                     Hoy es el partido
                                                 </button>
                                             </td>
@@ -295,7 +286,7 @@ $horaActual = date('h:i:s');
                                         } else {
                                         ?>
                                             <td>
-                                                <button type='button' class='btn btn-link btn-sm btn-rounded'>
+                                                <button type='button' class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
                                                     Próximamente
                                                 </button>
                                             </td>

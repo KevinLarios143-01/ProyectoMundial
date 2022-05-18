@@ -161,9 +161,7 @@ include('conn.php');
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+
     <a name="ingreso"></a>
     <main class="mt-5">
         <!--Section: Content-->

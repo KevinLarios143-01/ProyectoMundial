@@ -266,8 +266,8 @@ $horaActual = date('h:i:s');
                                         <?php
                                         if ($fechaActual > $fechaAcomprar) {
                                             if ($marc1 == 0 && $marc2 == 0) {
-                                                $numero_aleatorio1 = rand(0, 10);
-                                                $numero_aleatorio2 = rand(0, 10);
+                                                $numero_aleatorio1 = rand(1, 10);
+                                                $numero_aleatorio2 = rand(1, 10);
                                                 $marc1 = $numero_aleatorio1;
                                                 $marc2 = $numero_aleatorio2;
                                                 if ($marc1 > $marc2) {
