@@ -211,21 +211,57 @@ require('conn.php');
                     ?>
 
                     <?php
-                        $query_grupo_esp = "SELECT p.nombre_participante,f.nombre_federacion,p.wins,p.draws,p.loses, g.nombre_grupo, p.skin
+                        $query_grupo_esp = "SELECT p.nombre_participante,p.cod_participante,f.nombre_federacion,p.wins,p.draws,p.loses, g.nombre_grupo, p.skin
                                             FROM participantes p, grupo g, federacion f
                                             WHERE p.cod_grupo=$cod_grupo and p.cod_grupo=g.cod_grupo and p.cod_federacion=f.cod_federacion
-                                            GROUP BY p.nombre_participante,f.nombre_federacion,p.wins,p.draws,p.loses,g.nombre_grupo, p.skin";
+                                            ORDER BY p.wins DESC,p.draws DESC";
 
                         $result_grupo_esp = pg_query($link, $query_grupo_esp) or die('Query failed: ' . pg_last_error($link));
                         $makeorno = true;
+                        $ganadas=3;
+                        $empatadas=1;
+                        $perdidas=0;
+                        $punticos=0;
                         while ($line = pg_fetch_array($result_grupo_esp)) {
                             $participante = $line['nombre_participante'];
+                            $cod_participante=$line['cod_participante'];
                             $federacion= $line['nombre_federacion'];
                             $wins= $line['wins'];
                             $draws= $line['draws'];
                             $loses= $line['loses'];
                             $grupo = $line['nombre_grupo'];
                             $skin = $line['skin'];
+                            
+                            $punticos=($wins*$ganadas)+($draws*$empatadas)+($loses*$perdidas);
+
+                            $query_partidos_cod = "SELECT m.marcador1, m.marcador2,p.cod_participante, m.cod_participante1,m.cod_participante2,m.fase
+                                                    FROM participantes p, partidos m
+                                                    WHERE p.cod_participante=$cod_participante and (p.cod_participante=m.cod_participante1 or p.cod_participante=m.cod_participante2)
+                                                    GROUP BY m.marcador1, m.marcador2,p.cod_participante, m.cod_participante1,m.cod_participante2,m.fase;";
+                            
+                            $result_partidos_cod = pg_query($link, $query_partidos_cod) or die('Query failed: ' . pg_last_error($link));
+                            
+                            $goles_a_favor=array();
+                            $goles_en_contra=array();
+                            while ($line = pg_fetch_array($result_partidos_cod)) {
+                                $marcador1 = $line['marcador1'];
+                                $marcador2=$line['marcador2'];
+                                $par_general= $line['cod_participante'];
+                                $par1= $line['cod_participante1'];
+                                $par2= $line['cod_participante2'];
+                                $fase_par=$line['fase'];
+                                if($cod_participante==$par1 && $fase_par=="G"){
+                                    array_push($goles_a_favor,$marcador1);
+                                    array_push($goles_en_contra,$marcador2);
+                                }else if($cod_participante==$par2 && $fase_par=="G"){
+                                    array_push($goles_a_favor,$marcador2);
+                                    array_push($goles_en_contra,$marcador1);
+                                }
+
+                            }
+                            $goles_favor=array_sum($goles_a_favor);
+                            $goles_contra=array_sum($goles_en_contra);
+                            $dif_goles=$goles_favor-$goles_contra;
                             echo "
                                     <tr>
                                         <td>
@@ -247,16 +283,16 @@ require('conn.php');
                                             <p class='fw-normal mb-1'>$loses</p>
                                         </td>
                                         <td>
-                                        <p class='fw-normal mb-1'>$loses</p>
+                                        <p class='fw-normal mb-1'>$goles_favor</p>
                                         </td>
                                         <td>
-                                            <p class='fw-normal mb-1'>$loses</p>
+                                            <p class='fw-normal mb-1'>$goles_contra</p>
                                         </td>
                                         <td>
-                                            <p class='fw-normal mb-1'>$loses</p>
+                                            <p class='fw-normal mb-1'>$dif_goles</p>
                                         </td>
                                         <td>
-                                            <p class='fw-normal mb-1'>$loses</p>
+                                            <p class='fw-normal mb-1'>$punticos</p>
                                         </td>
                                         
                                     </tr>";

@@ -1,7 +1,6 @@
 <?php
 require('conn.php');
-session_start();
-$username = $_SESSION['nombre_usuario'];
+
 date_default_timezone_set('America/Guatemala');
 $fechaActual = date('Y-m-d');
 $horaActual = date('h:i:s');
@@ -172,7 +171,6 @@ $horaActual = date('h:i:s');
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
                     <strong>PARTIDOS</strong><br />
-                    <strong>Bienvenido <?php echo $username ?></strong>
                 </h4>
 
                 <div class="row d-flex justify-content-center">
@@ -180,7 +178,7 @@ $horaActual = date('h:i:s');
 
                         <!--Tomar los datos de la tabla de partidos-->
 
-                        <table class='table align-middle mb-0 bg-white'>
+                        <table class="table align-middle mb-0 bg-white">
                             <thead class='bg-light'>
                                 <tr>
                                     <th>Datos </th>
@@ -225,9 +223,9 @@ $horaActual = date('h:i:s');
                                     <tr>
                                         <td>
                                             <p class="fw-bold mb-1"><?php echo $fecha; ?></p>
-                                            <p class='fw-normal mb-1'><?php echo $hora. " Local Time"; ?></p>
+                                            <p class='fw-normal mb-1'><?php echo $hora . " Local Time"; ?></p>
                                             <p class='text-muted mb-0'><?php echo $nomlugar; ?></p>
-                                            <span class='badge badge-success rounded-pill d-inline'><?php echo "Match ".$id; ?></span>
+                                            <span class='badge badge-success rounded-pill d-inline'><?php echo "Match " . $id; ?></span>
                                         </td>
                                         <?php
 
@@ -321,49 +319,46 @@ $horaActual = date('h:i:s');
     <!--Main layout-->
 
     <hr class="my-5" />
-    <div class="container">
+    <!--Footer-->
+    <footer class="bg-light text-lg-start">
+        <div class="py-4 text-center">
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./Grupos.php#content" rel="nofollow">
+                Grupos
+            </a>
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./Resultados.php#content">
+                Resultados
+            </a>
+        </div>
 
+        <hr class="m-0" />
 
-        <!--Footer-->
-        <footer class="bg-light text-lg-start">
-            <div class="py-4 text-center">
-                <a role="button" class="btn btn-primary btn-lg m-2" href="./Grupos.php#content" rel="nofollow">
-                    Grupos
-                </a>
-                <a role="button" class="btn btn-primary btn-lg m-2" href="./Resultados.php#content">
-                    Resultados
-                </a>
-            </div>
+        <div class="text-center py-4 align-items-center">
+            <p>Follow FIFA World Cup on social media</p>
+            <a href="https://www.youtube.com/fifa" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.facebook.com/fifaworldcup/" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/FIFAWorldCup?s=20&t=RQ55fP7wMinXP9pq8NBEBw" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/KevinLarios143-01/ProyectoMundial.git" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
 
-            <hr class="m-0" />
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2022:
+            <b> Kevin Larios and Yair Menchú</b><br>
+            <a class="text-dark" href="https://github.com/KevinLarios143-01/ProyectoMundial.git">Repositorio</a>
+        </div>
 
-            <div class="text-center py-4 align-items-center">
-                <p>Follow FIFA World Cup on social media</p>
-                <a href="https://www.youtube.com/fifa" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://www.facebook.com/fifaworldcup/" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://twitter.com/FIFAWorldCup?s=20&t=RQ55fP7wMinXP9pq8NBEBw" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://github.com/KevinLarios143-01/ProyectoMundial.git" class="btn btn-primary m-1" role="button" rel="nofollow" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
+        <!-- Copyright -->
+    </footer>
 
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-                © 2022:
-                <b> Kevin Larios and Yair Menchú</b><br>
-                <a class="text-dark" href="https://github.com/KevinLarios143-01/ProyectoMundial.git">Repositorio</a>
-            </div>
-
-            <!-- Copyright -->
-        </footer>
-
-        <!--Footer-->
+    <!--Footer-->
 </body>
 
 </html>

@@ -34,3 +34,12 @@
  .navbar .nav-link {
    color: #fff !important;
  }
+
+ #imagen{
+
+  height: 50px;
+  width: 50px;
+  flex-direction: row;
+  margin: 10px;
+
+}

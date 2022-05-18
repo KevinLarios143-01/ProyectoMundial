@@ -319,16 +319,16 @@ $nombresa = $_SESSION['nombre_usuario'];
                     if ($makeorno1 && $makeorno2 && $makeorno3 && $makeorno4 && $hacer) {
 
                         $id++;
-                        $query2 = "INSERT INTO participantes VALUES ($id,'$lista1[0]',1,'$lista1[1]',$lista1[2],$grupo)";
+                        $query2 = "INSERT INTO participantes VALUES ($id,'$lista1[0]',1,'$lista1[1]',$lista1[2],$grupo,0,0,0)";
                         $result2 = pg_query($link, $query2);
                         $id++;
-                        $query3 = "INSERT INTO participantes VALUES ($id,'$lista2[0]',2,'$lista2[1]',$lista2[2],$grupo)";
+                        $query3 = "INSERT INTO participantes VALUES ($id,'$lista2[0]',2,'$lista2[1]',$lista2[2],$grupo,0,0,0)";
                         $result3 = pg_query($link, $query3);
                         $id++;
-                        $query4 = "INSERT INTO participantes VALUES ($id,'$lista3[0]',3,'$lista3[1]',$lista3[2],$grupo)";
+                        $query4 = "INSERT INTO participantes VALUES ($id,'$lista3[0]',3,'$lista3[1]',$lista3[2],$grupo,0,0,0)";
                         $result4 = pg_query($link, $query4);
                         $id++;
-                        $query5 = "INSERT INTO participantes VALUES ($id,'$lista4[0]',4,'$lista4[1]',$lista4[2],$grupo)";
+                        $query5 = "INSERT INTO participantes VALUES ($id,'$lista4[0]',4,'$lista4[1]',$lista4[2],$grupo,0,0,0)";
                         $result5 = pg_query($link, $query5);
                         if (!$result2 && !$result3 && !$result4 && !$result5) {
                             echo pg_last_error($dbconn);
