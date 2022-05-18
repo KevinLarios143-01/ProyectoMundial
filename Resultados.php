@@ -178,143 +178,148 @@ $horaActual = date('h:i:s');
 
                         <!--Tomar los datos de la tabla de partidos-->
 
-                        <table class="table table-hover">
-                            <tr>
-                                <td>Fase</td>
-                                <td>Usuario</td>
-                                <td>Puntos Acumulados</td>
-                            </tr>
-
-                            <?php
-
-                            $aux = 0;
-                            $link = pg_connect("$host $port $dbname $user $password") or die('Could not connect: ' . " error de conexion");
-                            $sqlUs = "select * from usuarios";
-                            $resultUs = pg_query($link, $sqlUs) or die('Query failed: ' . pg_last_error($link));
-                            while ($lineUs = pg_fetch_array($resultUs)) {
-
-                                $username = $lineUs['usuario'];
-                                $puntosG = 0;
-                                $puntosE = 0;
-                                $uf = '';
-
-                                $sql = "select * from quinielas Q, partidos Pa ";
-                                $sql .= "where Q.num_partido = Pa.num_partido and Q.usuario = '$username';";
-                                $result = pg_query($link, $sql) or die('Query failed: ' . pg_last_error($link));
-                                while ($line = pg_fetch_array($result)) {
-
-                                    $id = $line['num_partido'];
-                                    $fecha = $line['fecha'];
-                                    $fase = $line['fase'];
-                                    $equipo1 = $line['cod_participante1'];
-                                    $equipo2 = $line['cod_participante2'];
-                                    $marc1 = $line['marcador1'];
-                                    $marc2 = $line['marcador2'];
-                                    $uf = $fase;
-
-                                    if ($fechaActual > $fecha) {
-                                        if ($marc1 == 0 and $marc2 == 0) {
-
-                                            $numero_aleatorio1 = rand(0, 10);
-                                            $numero_aleatorio2 = rand(0, 10);
-                                            $marc1 = $numero_aleatorio1;
-                                            $marc2 = $numero_aleatorio2;
-                                            $acl = "UPDATE partidos SET marcador1=$numero_aleatorio1, marcador2 =$numero_aleatorio2 WHERE num_partido=$id;";
-                                            $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                        }
-
-                                        if ($fase == 'G') {
-
-                                            $pro1 = 0;
-                                            $pro2 = 0;
-
-                                            $pro1 = $line['m_1'];
-                                            $pro2 = $line['m_2'];
-
-
-                                            if (($pro1 == $marc1) && (($pro2 == $marc2))) {
-
-                                                $puntosG = $puntosG + 6;
-                                            } else {
-                                                if ($pro1 > $pro2) {
-                                                    $p1 = 1;
-                                                } else {
-                                                    $p1 = 2;
-                                                }
-
-                                                if ($p1 == 1) {
-                                                    if ($marc1 > $marc2) {
-                                                        $puntosG = $puntosG + 3;
-                                                    }
-                                                } elseif ($p1 == 2) {
-                                                    if ($marc2 > $marc1) {
-                                                        $puntosG = $puntosG + 3;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        if ($fase == 'E') {
-
-                                            if ($aux == 0) {
-                            ?>
-                                                <tr>
-                                                    <td><?php echo $fase; ?></td>
-                                                    <td><?php echo $username; ?></td>
-                                                    <td><?php echo $puntosG; ?></td>
-                                                </tr>
+                        <table class="table align-middle mb-0 bg-white">
+                            <thead class='bg-light'>
+                                <tr>
+                                    <th>FASE</th>
+                                    <th>USUARIO </th>
+                                    <th>PUNTOS ACUMULADOS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-                                                $aux = 1;
+
+                                $aux = 0;
+                                $link = pg_connect("$host $port $dbname $user $password") or die('Could not connect: ' . " error de conexion");
+                                $sqlUs = "select * from usuarios";
+                                $resultUs = pg_query($link, $sqlUs) or die('Query failed: ' . pg_last_error($link));
+                                while ($lineUs = pg_fetch_array($resultUs)) {
+
+                                    $username = $lineUs['usuario'];
+                                    $puntosG = 0;
+                                    $puntosE = 0;
+                                    $uf = '';
+
+                                    $sql = "select * from quinielas Q, partidos Pa ";
+                                    $sql .= "where Q.num_partido = Pa.num_partido and Q.usuario = '$username';";
+                                    $result = pg_query($link, $sql) or die('Query failed: ' . pg_last_error($link));
+                                    while ($line = pg_fetch_array($result)) {
+
+                                        $id = $line['num_partido'];
+                                        $fecha = $line['fecha'];
+                                        $fase = $line['fase'];
+                                        $equipo1 = $line['cod_participante1'];
+                                        $equipo2 = $line['cod_participante2'];
+                                        $marc1 = $line['marcador1'];
+                                        $marc2 = $line['marcador2'];
+                                        $uf = $fase;
+
+                                        if ($fechaActual > $fecha) {
+                                            if ($marc1 == 0 and $marc2 == 0) {
+
+                                                $numero_aleatorio1 = rand(0, 10);
+                                                $numero_aleatorio2 = rand(0, 10);
+                                                $marc1 = $numero_aleatorio1;
+                                                $marc2 = $numero_aleatorio2;
+                                                $acl = "UPDATE partidos SET marcador1=$numero_aleatorio1, marcador2 =$numero_aleatorio2 WHERE num_partido=$id;";
+                                                $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
                                             }
 
-                                            $pro1 = 0;
-                                            $pro2 = 0;
-                                            $principal = $vr['usuario'];
-                                            $pro1 = $vr['m_1'];
-                                            $pro2 = $vr['m_2'];
+                                            if ($fase == 'G') {
+
+                                                $pro1 = 0;
+                                                $pro2 = 0;
+
+                                                $pro1 = $line['m_1'];
+                                                $pro2 = $line['m_2'];
 
 
-                                            if (($pro1 == $marc1) && (($pro2 == $marc2))) {
+                                                if (($pro1 == $marc1) && (($pro2 == $marc2))) {
 
-                                                $puntosE = $puntosE + 6;
-                                            } else {
-                                                if ($pro1 > $pro2) {
-                                                    $p1 = 1;
+                                                    $puntosG = $puntosG + 6;
                                                 } else {
-                                                    $p1 = 2;
+                                                    if ($pro1 > $pro2) {
+                                                        $p1 = 1;
+                                                    } else {
+                                                        $p1 = 2;
+                                                    }
+
+                                                    if ($p1 == 1) {
+                                                        if ($marc1 > $marc2) {
+                                                            $puntosG = $puntosG + 3;
+                                                        }
+                                                    } elseif ($p1 == 2) {
+                                                        if ($marc2 > $marc1) {
+                                                            $puntosG = $puntosG + 3;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            if ($fase == 'E') {
+
+                                                if ($aux == 0) {
+                                ?>
+                                                    <tr>
+                                                        <td><?php echo $fase; ?></td>
+                                                        <td><?php echo $username; ?></td>
+                                                        <td><?php echo $puntosG; ?></td>
+                                                    </tr>
+                                    <?php
+                                                    $aux = 1;
                                                 }
 
-                                                if ($p1 == 1) {
-                                                    if ($marc1 > $marc2) {
-                                                        $puntosE = $puntosE + 3;
+                                                $pro1 = 0;
+                                                $pro2 = 0;
+                                                $principal = $vr['usuario'];
+                                                $pro1 = $vr['m_1'];
+                                                $pro2 = $vr['m_2'];
+
+
+                                                if (($pro1 == $marc1) && (($pro2 == $marc2))) {
+
+                                                    $puntosE = $puntosE + 6;
+                                                } else {
+                                                    if ($pro1 > $pro2) {
+                                                        $p1 = 1;
+                                                    } else {
+                                                        $p1 = 2;
                                                     }
-                                                } elseif ($p1 == 2) {
-                                                    if ($marc2 > $marc1) {
-                                                        $puntosE = $puntosE + 3;
+
+                                                    if ($p1 == 1) {
+                                                        if ($marc1 > $marc2) {
+                                                            $puntosE = $puntosE + 3;
+                                                        }
+                                                    } elseif ($p1 == 2) {
+                                                        if ($marc2 > $marc1) {
+                                                            $puntosE = $puntosE + 3;
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                }
+
+
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <p class="fw-bold mb-1"><?php echo $uf; ?></p>
+                                        </td>
+                                        <td>
+                                            <p class="fw-bold mb-1"><?php echo $username; ?></p>
+                                        </td>
+                                        <td>
+                                            <p class='fw-normal mb-1'><?php echo $puntosE; ?></p>
+                                        </td>
+                                    </tr>
+                                <?php
+
+                                } //END CONSULTA DE USUARIOS
 
 
                                 ?>
-                                <tr>
-                                    <td><?php echo $uf; ?></td>
-                                    <td><?php echo $username; ?></td>
-                                    <td><?php echo $puntosE; ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"></td>
-                                </tr>
-                            <?php
-
-                            } //END CONSULTA DE USUARIOS
-
-
-                            ?>
-
+                            </tbody>
                         </table>
                     </div>
                 </div>

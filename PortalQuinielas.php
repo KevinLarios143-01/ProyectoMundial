@@ -176,7 +176,7 @@ $horaActual = date('h:i:s');
         <div class="container">
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>QUNIELAS</strong><br />
+                    <strong>QUINIELAS</strong><br />
                     <strong>Bienvenido <?php echo $username ?></strong>
                 </h4>
 

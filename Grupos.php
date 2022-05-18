@@ -171,7 +171,7 @@ require('conn.php');
             <!--Section: Content-->
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>Grupo</strong>
+                    <strong>Grupos</strong>
                 </h4>
                 <div class="row d-flex justify-content-center">
                     <div class="btn-group shadow-0" role="group" aria-label="Basic example">
