@@ -20,7 +20,7 @@
   <title>FIFA</title>
 </head>
 <body>
-<?php
+    <?php
     require('conn.php');
     session_start();
 

@@ -50,6 +50,9 @@ $horaActual = date('h:i:s');
                             <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="./Eliminatorias.php" rel="nofollow">Eliminatorias</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="Resultados.php">Resultados</a>
                         </li>
                     </ul>
@@ -192,10 +195,12 @@ $horaActual = date('h:i:s');
                                 $aux = 0;
                                 $link = pg_connect("$host $port $dbname $user $password") or die('Could not connect: ' . " error de conexion");
                                 $sqlUs = "select * from usuarios";
+                                $acumuladisimo=0;
                                 $resultUs = pg_query($link, $sqlUs) or die('Query failed: ' . pg_last_error($link));
                                 while ($lineUs = pg_fetch_array($resultUs)) {
-
                                     $username = $lineUs['usuario'];
+                                    $acum = $lineUs['acumulado'];
+                                    $acumuladisimo=$acum;
                                     $puntosG = 0;
                                     $puntosE = 0;
                                     $uf = '';
@@ -310,7 +315,7 @@ $horaActual = date('h:i:s');
                                             <p class="fw-bold mb-1"><?php echo $username; ?></p>
                                         </td>
                                         <td>
-                                            <p class='fw-normal mb-1'><?php echo $puntosE; ?></p>
+                                            <p class='fw-normal mb-1'><?php echo $acumuladisimo; ?></p>
                                         </td>
                                     </tr>
                                 <?php

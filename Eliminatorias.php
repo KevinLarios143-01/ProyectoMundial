@@ -50,6 +50,9 @@ require('conn.php');
                             <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="./Eliminatorias.php" rel="nofollow">Eliminatorias</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="Resultados.php">Resultados</a>
                         </li>
                     </ul>
@@ -171,142 +174,37 @@ require('conn.php');
             <!--Section: Content-->
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>Grupos</strong>
+                    <strong>Eliminatorias</strong><br />
                 </h4>
                 <div class="row d-flex justify-content-center">
                     <div class="btn-group shadow-0" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">Todos</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">A</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">B</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">C</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">D</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">E</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">F</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">G</button>
-                        <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">H</button>
+                        <form action="Octavos.php" method="POST">
+                            <input type="hidden" name="">
+                            <button type="submit" name="ejecutar" class="btn btn-outline-secondary" data-mdb-color="dark">OCTAVOS DE FINAL</button>
+                        </form>
+                        <form action="Cuartos.php">
+                            <input type="hidden" name="">
+                            <button type="submit" name="ejecutar" class="btn btn-outline-secondary" data-mdb-color="dark">CUARTOS DE FINAL</button>
+                        </form>
+                        <form action="Semis.php">
+                            <input type="hidden" name="">
+                            <button type="submit" name="ejecutar" class="btn btn-outline-secondary" data-mdb-color="dark">SEMIFINAL</button>
+                        </form>
+                        <form action="Finales.php">
+                            <input type="hidden" name="">
+                            <button type="submit" name="ejecutar" class="btn btn-outline-secondary" data-mdb-color="dark">FINAL</button>
+                        </form>
                     </div>
-                </div><br><br>
-                <div class="row d-flex justify-content-center">
-                    <?php
-                    $query_grupos = "SELECT g.cod_grupo, g.nombre_grupo FROM grupo g";
-                    $result_grupos = pg_query($link, $query_grupos) or die('Query failed: ' . pg_last_error($link));
-                    while ($line = pg_fetch_array($result_grupos)) {
-                        $cod_grupo = $line['cod_grupo'];
-                        $nombre_grupo = $line['nombre_grupo'];
-                        echo " 
-                        <table class='table align-middle mb-0 bg-white'>
-                            <thead class='bg-light'>
-                                <tr>
-                                    <th>Grupo $nombre_grupo</th>
-                                    <th>PG</th>
-                                    <th>PE</th>
-                                    <th>PP</th>
-                                    <th>GF</th>
-                                    <th>GC</th>
-                                    <th>+/-</th>
-                                    <th>PTS</th>
-                                </tr>
-                            </thead>
-                            <tbody>";
-                    ?>
-
-                    <?php
-                        $query_grupo_esp = "SELECT p.nombre_participante,p.cod_participante,f.nombre_federacion,p.wins,p.draws,p.loses, g.nombre_grupo, p.skin
-                                            FROM participantes p, grupo g, federacion f
-                                            WHERE p.cod_grupo=$cod_grupo and p.cod_grupo=g.cod_grupo and p.cod_federacion=f.cod_federacion
-                                            ORDER BY p.wins DESC,p.draws DESC";
-
-                        $result_grupo_esp = pg_query($link, $query_grupo_esp) or die('Query failed: ' . pg_last_error($link));
-                        $makeorno = true;
-                        $ganadas=3;
-                        $empatadas=1;
-                        $perdidas=0;
-                        $punticos=0;
-                        while ($line = pg_fetch_array($result_grupo_esp)) {
-                            $participante = $line['nombre_participante'];
-                            $cod_participante=$line['cod_participante'];
-                            $federacion= $line['nombre_federacion'];
-                            $wins= $line['wins'];
-                            $draws= $line['draws'];
-                            $loses= $line['loses'];
-                            $grupo = $line['nombre_grupo'];
-                            $skin = $line['skin'];
-                            
-                            $punticos=($wins*$ganadas)+($draws*$empatadas)+($loses*$perdidas);
-
-                            $query_partidos_cod = "SELECT m.marcador1, m.marcador2,p.cod_participante, m.cod_participante1,m.cod_participante2,m.fase
-                                                    FROM participantes p, partidos m
-                                                    WHERE p.cod_participante=$cod_participante and (p.cod_participante=m.cod_participante1 or p.cod_participante=m.cod_participante2)
-                                                    GROUP BY m.marcador1, m.marcador2,p.cod_participante, m.cod_participante1,m.cod_participante2,m.fase;";
-                            
-                            $result_partidos_cod = pg_query($link, $query_partidos_cod) or die('Query failed: ' . pg_last_error($link));
-                            
-                            $goles_a_favor=array();
-                            $goles_en_contra=array();
-                            while ($line = pg_fetch_array($result_partidos_cod)) {
-                                $marcador1 = $line['marcador1'];
-                                $marcador2=$line['marcador2'];
-                                $par_general= $line['cod_participante'];
-                                $par1= $line['cod_participante1'];
-                                $par2= $line['cod_participante2'];
-                                $fase_par=$line['fase'];
-                                if($cod_participante==$par1 && $fase_par=="G"){
-                                    array_push($goles_a_favor,$marcador1);
-                                    array_push($goles_en_contra,$marcador2);
-                                }else if($cod_participante==$par2 && $fase_par=="G"){
-                                    array_push($goles_a_favor,$marcador2);
-                                    array_push($goles_en_contra,$marcador1);
-                                }
-
-                            }
-                            $goles_favor=array_sum($goles_a_favor);
-                            $goles_contra=array_sum($goles_en_contra);
-                            $dif_goles=$goles_favor-$goles_contra;
-                            echo "
-                                    <tr>
-                                        <td>
-                                            <div class='d-flex align-items-center'>
-                                                <img src='$skin' alt='' style='width: 45px; height: 45px' class='rounded-circle'/>
-                                                <div class='ms-3'>
-                                                    <p class='fw-bold mb-1'>$participante</p>
-                                                    <p class='text-muted mb-0'>$federacion</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class='fw-normal mb-1'>$wins</p>
-                                        </td>
-                                        <td>
-                                            <p class='fw-normal mb-1'>$draws</p>
-                                        </td>
-                                        <td>
-                                            <p class='fw-normal mb-1'>$loses</p>
-                                        </td>
-                                        <td>
-                                        <p class='fw-normal mb-1'>$goles_favor</p>
-                                        </td>
-                                        <td>
-                                            <p class='fw-normal mb-1'>$goles_contra</p>
-                                        </td>
-                                        <td>
-                                            <p class='fw-normal mb-1'>$dif_goles</p>
-                                        </td>
-                                        <td>
-                                            <p class='fw-normal mb-1'>$punticos</p>
-                                        </td>
-                                        
-                                    </tr>";
-                        }
-                        echo"
-                            </tbody>
-                        </table>
-                        <hr class='my-5'/>";
-                    }    
-                    ?>
-
-
                 </div>
+                <div class="card mb-3">
+                    <img src="./img/fasefinal.webp" class="img-thumbnail" alt="Hollywood Sign on The Hill" />
+                </div>
+
+
+
+
             </section>
+
             <!--Section: Content-->
 
         </div>

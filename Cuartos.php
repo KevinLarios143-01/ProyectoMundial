@@ -1,10 +1,5 @@
 <?php
 require('conn.php');
-session_start();
-$username = $_SESSION['nombre_usuario'];
-date_default_timezone_set('America/Guatemala');
-$fechaActual = date('Y-m-d');
-$horaActual = date('h:i:s');
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,10 +16,11 @@ $horaActual = date('h:i:s');
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-    <title>FIFA</title>
-
+    <!-- JQUERY 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/quinela.js"></script>
+    <title>FIFA</title>-->
+    <title>FIFA</title>
 </head>
 
 <body>
@@ -112,7 +108,7 @@ $horaActual = date('h:i:s');
                                 <h5 class="mb-4">
                                     21 de noviembre - 17 de diciembre
                                 </h5>
-                                <a class="btn btn-outline-light btn-lg m-2" href="#ingresar" role="button" rel="nofollow">Quinielas</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
                                 <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" target="_blank" role="button">Registrarse</a>
                             </div>
                         </div>
@@ -169,25 +165,24 @@ $horaActual = date('h:i:s');
         <!-- Carousel wrapper -->
     </header>
     <!--Main Navigation-->
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
-    <a name="ingreso"></a>
-    <main class="mt-5">
-        <!--Section: Content-->
+
+        <!--Main layout-->
+        <main class="mt-5">
+        <a name="content"></a>
         <hr class="my-5" />
         <div class="container">
+            <!--Section: Content-->
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>QUINIELAS</strong><br />
-                    <strong>Bienvenido <?php echo $username ?></strong>
+                    <strong>PARTIDOS</strong><br />
                 </h4>
 
                 <div class="row d-flex justify-content-center">
                     <div class="text-align:center;">
 
                         <!--Tomar los datos de la tabla de partidos-->
-                        <table class='table align-middle mb-0 bg-white'>
+
+                        <table class="table align-middle mb-0 bg-white">
                             <thead class='bg-light'>
                                 <tr>
                                     <th>Datos </th>
@@ -195,40 +190,30 @@ $horaActual = date('h:i:s');
                                     <th>Marcador1 </th>
                                     <th>Marcador2 </th>
                                     <th>Equipo2 </th>
-                                    <th>Marcador(Eq1)</th>
-                                    <th>Marcador(Eq2)</th>
                                     <th>Estado </th>
                                 </tr>
-
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "select * from partidos order by num_partido asc;";
+                                $sql = "SELECT * from partidos WHERE fase='E' ORDER BY num_partido ASC;";
                                 $result = pg_query($link, $sql) or die('Query failed: ' . pg_last_error($link));
                                 while ($line = pg_fetch_array($result)) {
                                     $id = $line['num_partido'];
                                     $codlugar = $line['cod_lugar'];
 
-                                    $sql3 = "select * from lugar;";
-                                    $result3 = pg_query($link, $sql3) or die('Query failed: ' . pg_last_error($link));
-                                    while ($line3 = pg_fetch_array($result3)) {
-
-                                        if ($codlugar == $line3['cod_lugar']) {
-
-                                            $nomlugar = $line3['nombre_estadio'];
-                                        }
+                                    $query_lugar = "SELECT * FROM lugar WHERE cod_lugar=$codlugar;";
+                                    $result_lugar = pg_query($link, $query_lugar) or die('Query failed: ' . pg_last_error($link));
+                                    while ($line3 = pg_fetch_array($result_lugar)) {
+                                        $line3['cod_lugar'];
+                                        $nomlugar = $line3['nombre_estadio'];
                                     }
-
-
-
                                     $hora = $line['hora'];
                                     $fecha = $line['fecha'];
                                     $equipo1 = $line['cod_participante1'];
                                     $equipo2 = $line['cod_participante2'];
                                     $marc1 = $line['marcador1'];
                                     $marc2 = $line['marcador2'];
-
-                                    $fechaAcomprar = $fecha;
+                                    $fechaAcomparar = $fecha;
                                 ?>
                                     <tr>
                                         <td>
@@ -263,169 +248,67 @@ $horaActual = date('h:i:s');
 
                                             </div>
                                         </td>
+                                        <td>
+                                            <p class='text-muted mb-0'><?php echo $marc1; ?></p>
+                                        </td>
+                                        <td>
+                                            <p class='text-muted mb-0'><?php echo $marc2; ?></p>
+                                        </td>
+                                        <td>
+                                            <div class='d-flex align-items-center'>
+                                                <img src="<?php echo $band2 ?>" alt='' style='width: 45px; height: 45px' class='rounded-circle' />
+                                                <div class='ms-3'>
+                                                    <p class='fw-bold mb-1'><?php echo $nom2; ?></p>
+                                                </div>
+
+                                            </div>
+                                        </td>
+
 
                                         <?php
-                                        if ($fechaActual > $fechaAcomprar) {
-                                            if ($marc1 == 0 && $marc2 == 0) {
-                                                $numero_aleatorio1 = rand(1, 10);
-                                                $numero_aleatorio2 = rand(1, 10);
-                                                $marc1 = $numero_aleatorio1;
-                                                $marc2 = $numero_aleatorio2;
-                                                if ($marc1 > $marc2) {
-                                                    $acl = "UPDATE participantes SET wins=wins+1 WHERE cod_participante=$equipo1;";
-                                                    $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                                    $acl = "UPDATE participantes SET loses=loses+1 WHERE cod_participante=$equipo2;";
-                                                    $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                                } else if ($marc1 < $marc2) {
-                                                    $acl = "UPDATE participantes SET loses=loses+1 WHERE cod_participante=$equipo1;";
-                                                    $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                                    $acl = "UPDATE participantes SET wins=wins+1 WHERE cod_participante=$equipo2;";
-                                                    $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                                } else if ($marc1 == $marc2) {
-                                                    $acl = "UPDATE participantes SET draws=draws+1 WHERE cod_participante=$equipo1;";
-                                                    $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                                    $acl = "UPDATE participantes SET draws=draws+1 WHERE cod_participante=$equipo2;";
-                                                    $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                                }
-                                                $acl = "UPDATE partidos SET marcador1=$numero_aleatorio1, marcador2 =$numero_aleatorio2 WHERE num_partido=$id;";
-                                                $resultUp = pg_query($link, $acl) or die('Query failed: ' . pg_last_error($link));
-                                            }
-                                            $quiniPuntos = "select * from quinielas where usuario='$username' and num_partido=$id";
-                                            $valores = pg_query($link, $quiniPuntos) or die('Query failed: ' . pg_last_error($link));
-                                            $pro1 = 0;
-                                            $pro2 = 0;
-                                            while ($vr = pg_fetch_array($valores)) {
-                                                $pro1 = $vr['m_1'];
-                                                $pro2 = $vr['m_2'];
-                                                $principal = $vr['usuario'];
-                                            }
+                                        if ($fechaActual > $fechaAcomparar) {
+
                                         ?>
                                             <td>
-                                                <p class='text-muted mb-0'><?php echo $marc1; ?></p>
-                                            </td>
-                                            <td>
-                                                <p class='text-muted mb-0'><?php echo $marc2; ?></p>
-                                            </td>
-                                            <td>
-                                                <div class='d-flex align-items-center'>
-                                                    <img src="<?php echo $band2 ?>" alt='' style='width: 45px; height: 45px' class='rounded-circle' />
-                                                    <div class='ms-3'>
-                                                        <p class='fw-bold mb-1'><?php echo $nom2; ?></p>
-                                                    </div>
-
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input type="integer" id="<?php echo "CA" . $id; ?>" name="m1" value="<?php echo $pro1 ?>" disabled class="form-control" />
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input type="integer" id="<?php echo "CB" . $id ?>" name="m2" value="<?php echo $pro2 ?>" disabled class="form-control">
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <button type="submit" name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class="btn btn-outline-primary registro" data-mdb-ripple-color="dark" disabled>
+                                                <button type='button' class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark">
                                                     Finalizado
                                                 </button>
                                             </td>
-                                            <?php
-
-                                            //Aquí se le sumaran los puntos correspondientes al usuario.
+                                        <?php
 
 
+                                        } elseif ($fechaActual == $fechaAcomparar) {
 
-                                            $puntos = 0;
+                                        ?>
+                                            <td>
+                                                <button type='button' class="btn btn-outline-success btn-rounded" data-mdb-ripple-color="dark">
+                                                    Hoy es el partido
+                                                </button>
+                                            </td>
+                                        <?php
 
-                                            if (($pro1 == $marc1) && ($pro2 == $marc2)) {
-                                                $puntos = 6;
-                                            } else {
-                                                if ($pro1 > $pro2) {
-                                                    $p1 = 1;
-                                                } else {
-                                                    $p1 = 2;
-                                                }
-
-                                                if ($p1 == 1) {
-                                                    if ($marc1 > $marc2) {
-                                                        $puntos = 3;
-                                                    }
-                                                } elseif ($p1 == 2) {
-                                                    if ($marc2 > $marc1) {
-                                                        $puntos = 3;
-                                                    }
-                                                }
-                                            }
-                                            $totalP = "UPDATE usuarios SET acumulado=acumulado+$puntos WHERE usuario='$username';";
-                                            $resultPun = pg_query($link, $totalP) or die('Query failed: ' . pg_last_error($link));
                                         } else {
-
-                                            $quiniPuntos = "select * from quinielas where usuario='$username' and num_partido=$id";
-                                            $valores = pg_query($link, $quiniPuntos) or die('Query failed: ' . pg_last_error($link));
-                                            $pro1 = 0;
-                                            $pro2 = 0;
-                                            while ($vr = pg_fetch_array($valores)) {
-
-                                                $principal = $vr['usuario'];
-                                                $pro1 = $vr['m_1'];
-                                                $pro2 = $vr['m_2'];
-                                            }
-
-                                            ?>
+                                        ?>
                                             <td>
-                                                <p class='text-muted mb-0'><?php echo $marc1; ?></p>
-                                            </td>
-                                            <td>
-                                                <p class='text-muted mb-0'><?php echo $marc2; ?></p>
-                                            </td>
-                                            <td>
-                                                <div class='d-flex align-items-center'>
-                                                    <img src="<?php echo $band2 ?>" alt='' style='width: 45px; height: 45px' class='rounded-circle' />
-                                                    <div class='ms-3'>
-                                                        <p class='fw-bold mb-1'><?php echo $nom2; ?></p>
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input type="integer" id="<?php echo "CA" . $id; ?>" name="m1" value="<?php echo $pro1 ?>" class="form-control">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input type="integer" id="<?php echo "CB" . $id ?>" name="m2" value="<?php echo $pro2 ?>" class="form-control">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <button type='submit' name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class="btn btn-outline-primary registro" data-mdb-ripple-color="dark">
-                                                    Registrar
+                                                <button type='button' class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
+                                                    Próximamente
                                                 </button>
                                             </td>
                                         <?php
                                         }
-
-
                                         ?>
-
                                     </tr>
                                 <?php
-
                                 }
-
                                 ?>
-
                             </tbody>
                         </table>
-
                     </div>
-
                 </div>
             </section>
+
             <!--Section: Content-->
+
         </div>
     </main>
     <!--Main layout-->
@@ -433,11 +316,11 @@ $horaActual = date('h:i:s');
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.youtube.com/fifa" rel="nofollow" target="_blank">
-                Calendario de Partidos
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./Partidos.php#content" rel="nofollow">
+                Partidos
             </a>
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.facebook.com/fifaworldcup/" target="_blank">
-                Grupos
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./Resultados.php#content">
+                Resultados
             </a>
         </div>
 

@@ -53,6 +53,9 @@ $nombresa = $_SESSION['nombre_usuario'];
                             <a class="nav-link" href="./Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="./Eliminatorias.php" rel="nofollow">Eliminatorias</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="./Resultados.php">Resultados</a>
                         </li>
                     </ul>

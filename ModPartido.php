@@ -53,6 +53,9 @@ $nombresa = $_SESSION['nombre_usuario'];
                             <a class="nav-link" href="./Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="./Eliminatorias.php" rel="nofollow">Eliminatorias</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="./Resultados.php">Resultados</a>
                         </li>
                     </ul>
@@ -442,7 +445,7 @@ $nombresa = $_SESSION['nombre_usuario'];
                 $result = pg_query($links, $querys) or die('Query failed: ' . pg_last_error($links));
                 $verify_exist = pg_num_rows($result);
 
-                if ($verify_exist >= 2) {
+                if ($verify_exist >= 5) {
                     $makeornos = false;
                     echo '<div class="alert alert-warning" role="alert">No se pueden programar mas partidos en este horario!</div>';
                 } else {
