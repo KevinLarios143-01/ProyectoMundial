@@ -292,10 +292,9 @@ $horaActual = date('h:i:s');
                                             $pro1 = 0;
                                             $pro2 = 0;
                                             while ($vr = pg_fetch_array($valores)) {
-
-                                                $principal = $vr['usuario'];
                                                 $pro1 = $vr['m_1'];
                                                 $pro2 = $vr['m_2'];
+                                                $principal = $vr['usuario'];
                                             }
                                         ?>
                                             <td>
@@ -316,7 +315,7 @@ $horaActual = date('h:i:s');
 
                                             <td>
                                                 <div class="form-outline">
-                                                    <input type="number" id="<?php echo "CA" . $id; ?>" name="m1" value="<?php echo $pro1 ?>" disabled class="form-control" />
+                                                    <input type="integer" id="<?php echo "CA" . $id; ?>" name="m1" value="<?php echo $pro1 ?>" disabled class="form-control" />
                                                 </div>
                                             </td>
                                             <td>
@@ -338,8 +337,7 @@ $horaActual = date('h:i:s');
 
                                             $puntos = 0;
 
-                                            if (($pro1 == $marc1) && (($pro2 == $marc2))) {
-
+                                            if (($pro1 == $marc1) && ($pro2 == $marc2)) {
                                                 $puntos = 6;
                                             } else {
                                                 if ($pro1 > $pro2) {
@@ -358,7 +356,8 @@ $horaActual = date('h:i:s');
                                                     }
                                                 }
                                             }
-                                            $totalP = "UPDATE usuarios SET acumulado=$puntos WHERE usuario='$username';";
+                                            echo "$pro1 $pro2";
+                                            $totalP = "UPDATE usuarios SET acumulado=acumulado+$puntos WHERE usuario='$username';";
                                             $resultPun = pg_query($link, $totalP) or die('Query failed: ' . pg_last_error($link));
                                         } else {
 

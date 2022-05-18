@@ -105,7 +105,7 @@ $horaActual = date('h:i:s');
                                 <h5 class="mb-4">
                                     21 de noviembre - 17 de diciembre
                                 </h5>
-                                <a class="btn btn-outline-light btn-lg m-2" href="#ingresar" role="button" rel="nofollow">Quinielas</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
                                 <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" target="_blank" role="button">Registrarse</a>
                             </div>
                         </div>
@@ -200,8 +200,8 @@ $horaActual = date('h:i:s');
                                     $puntosE = 0;
                                     $uf = '';
 
-                                    $sql = "select * from quinielas Q, partidos Pa ";
-                                    $sql .= "where Q.num_partido = Pa.num_partido and Q.usuario = '$username';";
+                                    $sql = "select * from quinielas q, partidos m 
+                                            where q.num_partido = m.num_partido and q.usuario = '$username';";
                                     $result = pg_query($link, $sql) or die('Query failed: ' . pg_last_error($link));
                                     while ($line = pg_fetch_array($result)) {
 
