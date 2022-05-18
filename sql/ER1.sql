@@ -92,12 +92,11 @@ CREATE TABLE Usuarios(
 );
 
 CREATE TABLE Quinielas(
-	cod_quiniela SERIAL,
 	M_1 int,
 	M_2 int,
 	usuario varchar(25),
 	num_partido int,
-	PRIMARY KEY (cod_quiniela),
+	PRIMARY KEY (usuario,num_partido),
 	FOREIGN KEY (usuario) REFERENCES Usuarios(usuario),
 	FOREIGN KEY (num_partido) REFERENCES Partidos(num_partido)
 );

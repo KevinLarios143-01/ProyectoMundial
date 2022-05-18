@@ -200,8 +200,6 @@ $horaActual = date('h:i:s');
                             </thead>
                             <tbody>
                                 <?php
-
-                                $link = pg_connect("$host $port $dbname $user $password") or die('Could not connect: ' . " error de conexion");
                                 $sql = "select * from partidos order by num_partido asc;";
                                 $result = pg_query($link, $sql) or die('Query failed: ' . pg_last_error($link));
                                 while ($line = pg_fetch_array($result)) {
@@ -328,7 +326,7 @@ $horaActual = date('h:i:s');
                                             </td>
 
                                             <td>
-                                                <button type="submit" name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class="btn btn-link btn-sm btn-rounded" disabled>
+                                                <button type="submit" name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class="btn btn-outline-primary registro" data-mdb-ripple-color="dark" disabled>
                                                     Finalizado
                                                 </button>
                                             </td>
@@ -402,7 +400,7 @@ $horaActual = date('h:i:s');
                                                 </div>
                                             </td>
                                             <td>
-                                                <button type='submit' name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class='btn btn-link btn-sm btn-rounded'>
+                                                <button type='submit' name="register" id="<?php echo $id; ?>" onclick="getValor(this);" class="btn btn-outline-primary registro" data-mdb-ripple-color="dark">
                                                     Registrar
                                                 </button>
                                             </td>
