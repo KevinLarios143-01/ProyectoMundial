@@ -190,6 +190,8 @@ $nombresa = $_SESSION['nombre_usuario'];
                             <a href="./PortalAdmin.php" class="list-group-item list-group-item-action px-3 border-0 active" aria-current="true">Panel de Control</a>
                             <a href="./CrearPartido.php" class="list-group-item list-group-item-action px-3 border-0 ">Crear Partidos</a>
                             <a href="./Estadios.php" class="list-group-item list-group-item-action px-3 border-0">Estadios</a>
+                            <a href="./Federaciones.php" class="list-group-item list-group-item-action px-3 border-0">Federaciones</a>
+                            <a href="./Participantes.php" class="list-group-item list-group-item-action px-3 border-0">Participantes</a>
                             <a href="./EditPartidos.php" class="list-group-item list-group-item-action px-3 border-0">Partidos</a>
                             <a href="./Sorteo.php" class="list-group-item list-group-item-action px-3 border-0">Crear Grupos</a>
                         </div>

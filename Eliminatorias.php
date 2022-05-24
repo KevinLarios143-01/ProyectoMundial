@@ -199,7 +199,20 @@ require('conn.php');
                 <div class="card mb-3">
                     <img src="./img/fasefinal.webp" class="img-thumbnail" alt="Hollywood Sign on The Hill" />
                 </div>
-
+                <div class="row d-flex justify-content-center">
+                    <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                        <form action="Eliminatorias.php" method="POST">
+                            <input type="hidden" name="">
+                            <button type="submit" name="reiniciar" class="btn btn-outline-secondary" data-mdb-color="dark">Actualizar Eliminatorias</button>
+                        </form>
+                    </div>
+                </div>
+                <?php
+                    if(isset($_POST['reiniciar'])){
+                        $query="DELETE FROM partidos WHERE fase='E';";
+                        $result = pg_query($link, $query) or die('Query failed: ' . pg_last_error($link));
+                    }
+                ?>
 
 
 

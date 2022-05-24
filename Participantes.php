@@ -1,6 +1,6 @@
 <?php
 require('conn.php');
-session_start();
+
 date_default_timezone_set('America/Guatemala');
 $fechaActual = date('Y-m-d');
 $horaActual = date('h:i:s');
@@ -44,16 +44,16 @@ $horaActual = date('h:i:s');
                 <div class="collapse navbar-collapse" id="navbarExample01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="Grupos.php">Grupos</a>
+                            <a class="nav-link" aria-current="page" href="./Grupos.php">Grupos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Partidos.php" rel="nofollow">Partidos</a>
+                            <a class="nav-link" href="./Partidos.php" rel="nofollow">Partidos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./Eliminatorias.php" rel="nofollow">Eliminatorias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Resultados.php">Resultados</a>
+                            <a class="nav-link" href="./Resultados.php">Resultados</a>
                         </li>
                     </ul>
 
@@ -109,7 +109,7 @@ $horaActual = date('h:i:s');
                                     21 de noviembre - 17 de diciembre
                                 </h5>
                                 <a class="btn btn-outline-light btn-lg m-2" href="./index.php#ingresar" role="button" rel="nofollow">Quinielas</a>
-                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" target="_blank" role="button">Registrarse</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./registro.php#regis" role="button">Registrarse</a>
                             </div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ $horaActual = date('h:i:s');
                         <div class="d-flex justify-content-center align-items-center h-100">
                             <div class="text-white text-center">
                                 <h2>¿Eres administrador?</h2>
-                                <a class="btn btn-outline-light btn-lg m-2" href="Admin.php#ingreso" target="_blank" role="button">Ingresar</a>
+                                <a class="btn btn-outline-light btn-lg m-2" href="./Admin.php#ingreso" target="_blank" role="button">Ingresar</a>
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@ $horaActual = date('h:i:s');
             <!--Section: Content-->
             <section class="mb-5">
                 <h4 class="mb-5 text-center">
-                    <strong>RESULTADOS</strong><br />
+                    <strong>PARTICIPANTES</strong><br />
                 </h4>
 
                 <div class="row d-flex justify-content-center">
@@ -184,66 +184,72 @@ $horaActual = date('h:i:s');
                         <table class="table align-middle mb-0 bg-white">
                             <thead class='bg-light'>
                                 <tr>
-                                    <th>FASE</th>
-                                    <th>USUARIO </th>
-                                    <th>PUNTOS ACUMULADOS</th>
+                                    <th>ID</th>
+                                    <th>EQUIPO</th>
+                                    <th>GRUPO</th>
+                                    <th>FEDERACI&Oacute;N</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
+                                <div class="row d-flex justify-content-center">
+                                    <?php
+                                    $query_grupo_esp = "SELECT  P.cod_participante,P.skin, P.nombre_participante, G.nombre_grupo, F.nombre_federacion 
+                                            FROM participantes P, federacion F, grupo G
+                                            WHERE P.cod_grupo=G.cod_grupo and P.cod_federacion=F.cod_federacion
+                                            ORDER BY P.cod_Participante ASC";
 
-                                $aux = 0;
-                                $link = pg_connect("$host $port $dbname $user $password") or die('Could not connect: ' . " error de conexion");
-                                $sqlUs = "select * from usuarios";
-                                $acumuladisimo=0;
-                                $resultUs = pg_query($link, $sqlUs) or die('Query failed: ' . pg_last_error($link));
-                                while ($lineUs = pg_fetch_array($resultUs)) {
-                                    $username = $lineUs['usuario'];
-                                    $acum = $lineUs['acumulado'];
-                                    $acumuladisimo=$acum;
-                                    $puntosG = 0;
-                                    $puntosE = 0;
-                                    $uf = '';
-                                    ?>
+                                    $result_grupo_esp = pg_query($link, $query_grupo_esp) or die('Query failed: ' . pg_last_error($link));
+                                    $makeorno = true;
+                                    while ($line = pg_fetch_array($result_grupo_esp)) {
+                                        $cod_participante = $line['cod_participante'];
+                                        $skin = $line['skin'];
+                                        $participante = $line['nombre_participante'];
+                                        $grupo = $line['nombre_grupo'];
+                                        $federacion = $line['nombre_federacion'];
+
+                                        echo "
                                     <tr>
                                         <td>
-                                            <p class="fw-bold mb-1"><?php echo $uf; ?></p>
+                                            <p class='fw-bold mb-1'>$cod_participante</p>
                                         </td>
                                         <td>
-                                            <p class="fw-bold mb-1"><?php echo $username; ?></p>
+                                            <div class='d-flex align-items-center'>
+                                                <img src='$skin' alt='' style='width: 45px; height: 45px' class='rounded-circle'/>
+                                                <div class='ms-3'>  
+                                                <p class='fw-bold mb-1'>$participante</p>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
-                                            <p class='fw-normal mb-1'><?php echo $acumuladisimo; ?></p>
+                                            <p class='fw-normal mb-1'>$grupo</p>
                                         </td>
-                                    </tr>
-                                <?php
-
-                                } //END CONSULTA DE USUARIOS
-
-
-                                ?>
+                                        <td>
+                                            <p class='fw-normal mb-1'>$federacion</p>
+                                        </td>
+                                        
+                                    </tr>";
+                                    }
+                                    echo "
                             </tbody>
                         </table>
+                        <hr class='my-5'/>";
+                                    ?>
+                                </div>
                     </div>
-                </div>
             </section>
+
             <!--Section: Content-->
 
         </div>
     </main>
     <!--Main layout-->
 
-
-
-
+    <hr class="my-5" />
     <!--Footer-->
     <footer class="bg-light text-lg-start">
         <div class="py-4 text-center">
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.youtube.com/fifa" rel="nofollow" target="_blank">
-                Calendario de Partidos
-            </a>
-            <a role="button" class="btn btn-primary btn-lg m-2" href="https://www.facebook.com/fifaworldcup/" target="_blank">
-                Grupos
+            <a role="button" class="btn btn-primary btn-lg m-2" href="./PortalAdmin.php#content">
+                Panel de Control
             </a>
         </div>
 

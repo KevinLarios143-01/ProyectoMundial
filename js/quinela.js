@@ -21,7 +21,12 @@ $(function(){
         }
 
         $.post("registrarQuinelas.php", postData, function(response){
-            alert(response);
+            if(response.normalize()==="El marcador se ha ingresado con éxito"){
+                alert("Procesado:"+response);
+            }else{
+                alert("No se puede reingresar quiniela");
+            }
+
         });
 
     });
